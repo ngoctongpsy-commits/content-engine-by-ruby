@@ -1,0 +1,92 @@
+{
+  "_comment": "Posting channel config. CMS for blog publishing + social channels via Make.com webhook.",
+
+  "cms": {
+    "_comment": "Blog publishing target. provider \"none\" = no CMS: publish-blog.py writes final HTML to outputs/blogs/ready/ for manual or GitHub publishing. Other providers (directus, strapi, contentful, webflow) POST to the CMS.",
+    "provider": "directus",
+    "base_url": "https://YOUR-CMS-DOMAIN.com",
+    "token_file": ".cms-token",
+    "files_folder_uuid": "OPTIONAL-FOR-DIRECTUS",
+    "posts_collection": "posts",
+    "fields": {
+      "slug_field": "slug",
+      "title_field": "title",
+      "html_field": "html",
+      "description_field": "description",
+      "status_field": "status",
+      "image_field": "image",
+      "published_status_value": "published",
+      "draft_status_value": "draft"
+    },
+    "public_url_pattern": "https://YOUR-DOMAIN.com/blog/{slug}",
+    "image_url_pattern": "{base_url}/assets/{uuid}.png"
+  },
+
+  "social": {
+    "_comment": "Make.com webhook routes social posts to multiple channels. Each channel filtered by `channel` field.",
+    "make_webhook_url_file": ".make-webhook-url",
+    "make_api_token_file": ".make-api-token",
+    "make_scenario_id": "REPLACE_WITH_SCENARIO_ID",
+    "make_base_url": "https://eu1.make.com",
+    "channels": {
+      "linkedin_company": {
+        "enabled": true,
+        "channel_field_value": "linkedin",
+        "post_visibility": "PUBLIC",
+        "feed_url": "https://www.linkedin.com/company/YOUR-COMPANY-SLUG/"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "channel_field_value": "facebook",
+        "feed_url": "https://www.facebook.com/YOUR-FB-PAGE-SLUG"
+      },
+      "linkedin_personal": {
+        "enabled": false,
+        "channel_field_value": "linkedin-personal",
+        "_comment": "Founder personal LinkedIn — usually manual post, not automated"
+      },
+      "x_twitter": {
+        "enabled": false,
+        "channel_field_value": "x"
+      }
+    }
+  },
+
+  "schedule": {
+    "_comment": "Cron-style schedules in LOCAL timezone. Adjust to your audience's peak engagement hour.",
+    "blog_draft_generation": {
+      "cron": "0 2 * * *",
+      "_comment": "Daily 02:02 — generates 3 drafts for next day's publish"
+    },
+    "blog_publish_slot_a": {
+      "cron": "30 10 * * *",
+      "_comment": "10:30 — foundational long-form blog"
+    },
+    "blog_publish_slot_b": {
+      "cron": "30 14 * * *",
+      "_comment": "14:30 — mid-funnel comparison blog"
+    },
+    "blog_publish_slot_c": {
+      "cron": "30 18 * * *",
+      "_comment": "18:30 — news commentary blog"
+    },
+    "weekly_social_generation": {
+      "cron": "0 21 * * 1",
+      "_comment": "Mon 21:00 — weekly social packet generation"
+    },
+    "weekly_social_posting": {
+      "cron": "30 11 * * 2",
+      "_comment": "Tue 11:30 — fire social posts at audience peak engagement hour"
+    }
+  },
+
+  "notifications": {
+    "telegram": {
+      "config_file": ".notify-config",
+      "alert_on_publish_success": true,
+      "alert_on_publish_failure": true,
+      "alert_on_social_post_success": true,
+      "alert_on_social_post_failure": true
+    }
+  }
+}

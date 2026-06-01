@@ -1,0 +1,43 @@
+# Secrets - never commit
+config/.cms-token
+config/.directus-token
+config/.make-webhook-url
+config/.make-api-config
+config/.notify-config
+config/.gsc-indexing-key.json
+examples/*/config/.cms-token
+examples/*/config/.directus-token
+examples/*/config/.make-webhook-url
+examples/*/config/.make-api-config
+examples/*/config/.notify-config
+examples/*/config/.gsc-indexing-key.json
+
+# Per-tenant live config (templates are committed; live configs are not)
+config/brand.json
+config/channels.json
+config/content-calendar.md
+
+# Runtime outputs (drafts, rendered thumbnails, packet JSON, archived posts)
+outputs/
+examples/*/outputs/
+
+# Logs
+logs/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+.synctest.txt
+*.plugin

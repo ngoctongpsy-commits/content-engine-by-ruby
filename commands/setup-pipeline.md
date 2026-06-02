@@ -61,6 +61,10 @@ Ask:
 
 Goal: posts must actually get INDEXED by Google and rank, not just read well. See skills/seo-optimization/references/google-seo-standards.md.
 
+## Step 4.7 - Video (optional)
+
+Ask if they want short-form video. If yes: set `video.platforms` (which platforms + aspect) and confirm the Higgsfield connector is added (`https://mcp.higgsfield.ai/mcp`) with credits. Video is on-demand via `/make-video`, not auto-scheduled. See CONNECTORS.md.
+
 ## Step 5 - Channels
 
 Ask:

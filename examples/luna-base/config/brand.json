@@ -367,5 +367,47 @@
     },
     "default_intent": "https://lunabase.ai/sitemap.xml",
     "_default_intent_options": "informational | commercial | transactional | navigational"
+  },
+  "video": {
+    "_comment": "On-demand short-form video. provider 'higgsfield' uses the connected Higgsfield MCP (mcp.higgsfield.ai); tool-agnostic - any ~~video MCP works. Higgsfield clips max ~15s. Per-platform specs so each post gets the right aspect. Generating video consumes Higgsfield credits (free plan = 0).",
+    "provider": "higgsfield",
+    "_provider_options": "higgsfield (Higgsfield MCP) | other connected ~~video MCP",
+    "default_model": "",
+    "_default_model_note": "Optional: pin a Higgsfield video model id (e.g. veo, kling, sora). Empty = the skill calls models_explore/recommend to pick per shot.",
+    "style": "clickbait",
+    "_style_note": "First-1-second hook, fast cuts, on-screen text kept short and CORRECT (added as overlay, never trust AI to spell long text), end CTA + company.domain wordmark, on-brand palette colors. No fabricated claims.",
+    "voiceover": false,
+    "platforms": {
+      "tiktok": {
+        "enabled": true,
+        "aspect": "9:16",
+        "max_seconds": 15
+      },
+      "reels": {
+        "enabled": true,
+        "aspect": "9:16",
+        "max_seconds": 15
+      },
+      "shorts": {
+        "enabled": true,
+        "aspect": "9:16",
+        "max_seconds": 15
+      },
+      "facebook": {
+        "enabled": true,
+        "aspect": "1:1",
+        "max_seconds": 15
+      },
+      "linkedin": {
+        "enabled": true,
+        "aspect": "1:1",
+        "max_seconds": 15
+      },
+      "youtube": {
+        "enabled": false,
+        "aspect": "16:9",
+        "max_seconds": 15
+      }
+    }
   }
 }

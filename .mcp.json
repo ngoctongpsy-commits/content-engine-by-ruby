@@ -1,7 +1,12 @@
 {
   "_meta": {
-    "description": "Optional MCP servers for Content Engine. None are required; everything works with file system + skills alone. Connect any of these to extend the pipeline.",
+    "description": "Optional MCP servers for the Content Engine. None are strictly required - skills work with files alone - but connecting these extends the pipeline. Video uses the ~~video category (default: Higgsfield). You still authenticate each server with your own account.",
     "by": "Ruby"
   },
-  "mcpServers": {}
+  "mcpServers": {
+    "higgsfield": {
+      "type": "http",
+      "url": "https://mcp.higgsfield.ai/mcp"
+    }
+  }
 }

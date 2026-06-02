@@ -24,6 +24,8 @@ Before writing ANY content, read `config/brand.json` (or `examples/<brand>/confi
 - `palette.*` - every hex color you may use; `palette._forbidden_colors.*` - colors that MUST NOT appear (hard reject)
 - `typography.*` - fonts + sizing
 - `format.*` - THE LAYOUT. preset + per-field overrides for hero, body, numbering, references, figures, footer, SEO, social card. See Step 2.
+- `format.images.*` - where the THUMBNAIL comes from: provider `canva` (clickbait image via Canva) or `svg` (legacy). See Step 8.5.
+- `seo.*` - region, language, E-E-A-T identity (author + credentials, organization, sameAs), indexing settings, and `quality_gate`. Drives the Google quality gate in Step 7.6 and the byline/JSON-LD.
 - `content_model.*` - slots (label/intent/word counts), pillars, feature angles, stat_rigor
 - `voice.*` - account voices (`voice.default_account` picks the active one), forbidden phrases/chars
 - `svg_figure.*` - figure viewBox + zones (only if figures enabled)
@@ -47,6 +49,8 @@ Everything you build in Step 5 MUST follow these resolved values. There is no de
 ### Step 3 - Read content calendar + slot
 
 Read `config/content-calendar.md` to find today's topic by date + slot label (A/B/C) + pillar. If no calendar exists, ask the user for the topic.
+
+If a competitor/trend brief exists for this topic (from the `competitor-trend-research` skill), use its angle, outline, keywords, and "original value to add" so the piece matches intent and beats the current SERP (never a copy).
 
 Pull slot length + intent from `content_model.slots.<A|B|C>`:
 - `label`, `intent` - what this slot is for (brand-defined, NOT assumed to be foundational/comparison/news)
@@ -82,7 +86,7 @@ Assemble in this order, honoring resolved values:
    - `apa`: APA 7th edition list with live URLs.
    - `simple`: a short "Sources" list of named links.
    - `none`: omit the reference section entirely.
-8. **SEO meta** per `seo.*`: Open Graph if `open_graph`, Twitter Card if `twitter_card`, JSON-LD Article schema if `json_ld`, canonical URL. Author byline from `voice.accounts.<default_account>.author_name` if defined, else `company.name`.
+8. **SEO meta** per `format.blog.seo`: Open Graph if `open_graph`, Twitter Card if `twitter_card`, JSON-LD Article if `json_ld`, canonical URL from `seo.indexing.canonical_base`. JSON-LD `author` = `seo.eeat.author_name` (+ credentials) and `publisher` = `seo.eeat.organization` (fall back to `company.name`). Title 50-60 chars with the primary keyword; meta description 150-160 chars.
 
 ### Step 6 - Figure footer branding (only if figures enabled)
 
@@ -113,6 +117,18 @@ orb-wordmark snippet (replace `{...}` with config values inline):
 - `cited`: numbers allowed if cited inline `(Source: <name>, <year>)` to a real source. Never invent.
 - `off`: no numeric-claim enforcement (lifestyle/brand content). Still never fabricate facts.
 
+### Step 7.6 - SEO + Google quality gate (must get indexed AND rank)
+
+Read `references/google-seo-standards.md` and run the gate (this is what stops the post from being unindexed or treated as thin AI content). Confirm:
+- INDEXABLE: one H1, keyworded readable slug, title 50-60 chars, meta description 150-160 chars, canonical, OG/Twitter, JSON-LD Article with real author+publisher, image alt text, internal links to related posts.
+- E-E-A-T: real author byline + credentials from `seo.eeat`; first-hand specifics + concrete examples; cited credible sources for claims; factual (honor `content_model.stat_rigor`).
+- HELPFUL + people-first: fully answers the search intent; original value beyond restating page 1; a direct answer in the first 1-2 paragraphs.
+- NOT thin/scaled AI: genuine added expertise, not a near-duplicate filler page.
+- HUMAN VOICE: varied sentence rhythm, concrete detail, a point of view, none of `voice.forbidden_phrases.ai_tells`, no padding.
+- KEYWORD/INTENT: primary keyword in title/H1/slug/first-100-words + natural throughout; secondary/long-tail/question variants in H2/H3.
+
+If `seo.quality_gate` is `strict`, do NOT write the draft as ready until every item passes - fix and re-check. (Use the `seo-optimization` skill for a full audit or keyword/intent research.)
+
 ### Step 8 - Self-validate before output
 
 - [ ] Layout matches the RESOLVED format (hero_style, body_style, numbering, references, figures presence) - not any assumed default
@@ -124,19 +140,31 @@ orb-wordmark snippet (replace `{...}` with config values inline):
 - [ ] Reference section matches `references_style` (apa / simple / none)
 - [ ] Figures present ONLY if `figures.enabled`; each has viewBox `0 0 {svg_figure.viewbox_width} {svg_figure.viewbox_height}` and the correct footer branding
 - [ ] Stat rigor honored per `content_model.stat_rigor`
+- [ ] If `format.images.provider` is `canva`: a `.thumb.png` sidecar was generated at the configured size
+- [ ] SEO/Google gate (Step 7.6) passes: indexable on-page, E-E-A-T (real author + sources + first-hand specifics), helpful/people-first, human voice, intent-matched keyword placement
 
 Fix any failure BEFORE writing output.
 
+### Step 8.5 - Thumbnail image (provider-aware)
+
+The thumbnail is SEPARATE from the in-article figures (those stay SVG, Step 4). Resolve `format.images.provider`:
+
+- `svg` (legacy): do nothing here. The publish script derives the thumbnail from the best in-article SVG figure.
+- `canva`: generate a CLICKBAIT thumbnail with the connected Canva tools. Read `references/canva-images.md`. In short: compose a fresh clickbait prompt from this blog's headline/angle, generate a design with Canva at `format.images.sizes.blog_thumbnail_px` (default 1200x630), export PNG, and save it as the sidecar `outputs/blogs/draft-YYYY-MM-DD-slot-{X}-{slug}.thumb.png` (same name as the draft, with `.thumb.png`). The publish script auto-detects this PNG and uses it as the thumbnail, falling back to an SVG figure only if it is missing.
+
+Do this AFTER the HTML is written so the slug is final.
+
 ### Step 9 - Output
 
-Write final HTML to `outputs/blogs/draft-YYYY-MM-DD-slot-{X}-{slug}.html`. The publishing
-pipeline picks it up.
+Write final HTML to `outputs/blogs/draft-YYYY-MM-DD-slot-{X}-{slug}.html`. If you generated a Canva thumbnail in Step 8.5, it sits next to it as `...{slug}.thumb.png`. The publishing pipeline picks both up.
 
 ## References
 
 - `references/format-presets.md` - how `format.preset` expands into layout decisions (READ in Step 2)
 - `references/svg-patterns.md` - 12 figure patterns + layout invariants (only when figures enabled)
 - `references/brand-voice-rules.md` - voice enforcement detail
+- `references/canva-images.md` - clickbait thumbnail via Canva (only when `format.images.provider` is `canva`)
+- `references/google-seo-standards.md` - Google indexability + E-E-A-T + Helpful Content + human-voice gate (READ in Step 7.6)
 
 ## Anti-patterns
 

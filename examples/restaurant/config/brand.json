@@ -1,0 +1,224 @@
+{
+  "_comment": "Example tenant: a restaurant. SAME engine as luna-base, completely different output - proof the plugin is brand-neutral. No CMS (publishes via GitHub), magazine-light layout, no academic numbering, no APA, photos instead of data figures, stat rigor off.",
+  "company": {
+    "name": "Maison Olive",
+    "domain": "maisonolive.com",
+    "tagline": "Mediterranean kitchen and wine bar",
+    "url": "https://maisonolive.com",
+    "_naming_rules": {
+      "forbidden_substitutions": []
+    }
+  },
+  "palette": {
+    "primary": "#7A8450",
+    "primary_dark": "#4F5733",
+    "primary_light": "#C7CBA6",
+    "secondary": "#B5654A",
+    "background_dark": "#2B2A26",
+    "background_dark_2": "#3A3833",
+    "background_dark_3": "#4A4740",
+    "background_light": "#FBF7EF",
+    "text_on_dark": "#FBF7EF",
+    "text_on_dark_muted": "#C9C3B5",
+    "text_on_light": "#2B2A26",
+    "urgency": "#B5654A",
+    "_logo_orb_gradient": {
+      "stop_0": "#7A8450",
+      "stop_100": "#B5654A"
+    },
+    "_forbidden_colors": {
+      "_comment": "Keep brand off generic Tailwind blues/purples.",
+      "hex": [
+        "#3B82F6",
+        "#8B5CF6",
+        "#EC4899",
+        "#10B981"
+      ],
+      "rgba_prefixes": [
+        "rgba(59,130,",
+        "rgba(139,92,"
+      ]
+    }
+  },
+  "typography": {
+    "primary_font": "'Playfair Display', Georgia, serif",
+    "body_font": "'Source Sans 3', system-ui, sans-serif",
+    "headline_weight": 700,
+    "body_size_px": 19,
+    "body_line_height": 1.7,
+    "body_max_width_px": 720
+  },
+  "format": {
+    "_comment": "Restaurant look: magazine-light. Photo hero, magazine body, no numbering, simple sources, decorative imagery, wordmark footer. The opposite of editorial-dark.",
+    "preset": "magazine-light",
+    "blog": {
+      "hero_style": "image",
+      "body_style": "magazine",
+      "heading_numbering": false,
+      "references_style": "simple",
+      "cta": {
+        "enabled": true
+      },
+      "figures": {
+        "enabled": false,
+        "type": "none",
+        "count_by_slot": {
+          "A": 0,
+          "B": 0,
+          "C": 0
+        },
+        "footer_branding": "wordmark"
+      },
+      "seo": {
+        "json_ld": true,
+        "open_graph": true,
+        "twitter_card": true
+      }
+    },
+    "social": {
+      "card_branding": "wordmark",
+      "card_size_px": 1080,
+      "card_aspect": "square"
+    },
+    "images": {
+      "_comment": "Where the THUMBNAIL and SOCIAL images come from. provider 'canva' = Claude writes a fresh clickbait prompt per piece and generates the image with the connected Canva tools at session time, then exports PNG. provider 'svg' = legacy inline SVG. NOTE: in-article blog figures are ALWAYS SVG regardless. Sizes verified June 2026.",
+      "provider": "canva",
+      "_provider_options": "canva (requires the Canva connector) | svg (no external dependency)",
+      "style": "clickbait",
+      "_style_note": "Header may carry one short, bold clickbait HEADLINE (<=8 words, real wording). The ONLY brand wordmark allowed is exactly company.domain, small in a bottom-corner FOOTER - no tagline, no other text, no numbers unless real. Method: let Canva generate the visual + headline + wordmark, then AUDIT the editable text - fix the headline if mangled, make the wordmark read exactly company.domain, and DELETE any junk/gibberish/duplicate text - then commit. Never trust the generator spelling.",
+      "sizes": {
+        "blog_thumbnail_px": "1200x630",
+        "_blog_thumbnail_note": "Open Graph / link-preview standard (1.91:1). Keep headline + faces in center 1080x600 safe zone.",
+        "linkedin_px": "1200x1200",
+        "_linkedin_note": "Square feed image for strong presence. Landscape/link alt: 1200x627.",
+        "facebook_px": "1080x1350",
+        "_facebook_note": "Portrait 4:5 for max mobile real estate. Square alt: 1080x1080; landscape/link alt: 1200x630."
+      }
+    }
+  },
+  "voice": {
+    "_comment": "One account is enough for a small restaurant.",
+    "default_account": "house",
+    "accounts": {
+      "house": {
+        "_comment": "Warm first-person-plural house voice.",
+        "pronoun": "we",
+        "tone": "warm, sensory, welcoming, unfussy",
+        "promote_product_directly": true
+      }
+    },
+    "forbidden_phrases": {
+      "ai_tells": [
+        "delve into",
+        "culinary journey",
+        "tantalize your taste buds",
+        "elevate your dining experience",
+        "nestled in the heart of"
+      ],
+      "overclaims": [
+        "best restaurant",
+        "world-class",
+        "award-winning"
+      ],
+      "generic_openers": [
+        "In today's fast-paced world",
+        "Look no further"
+      ]
+    },
+    "required_phrasings": {
+      "approved_only_phrasings": []
+    },
+    "forbidden_chars": {
+      "em_dash": true,
+      "en_dash": true,
+      "emoji": false
+    }
+  },
+  "svg_figure": {
+    "_comment": "Unused (figures disabled) but kept for schema completeness.",
+    "viewbox_width": 1200,
+    "viewbox_height": 750,
+    "safe_margin_left_px": 60,
+    "safe_margin_right_px": 1140,
+    "zones": {
+      "title_cluster_y_min": 30,
+      "title_cluster_y_max": 180,
+      "main_visual_y_min": 200,
+      "main_visual_y_max": 680,
+      "footer_y_min": 700,
+      "footer_y_max": 740
+    },
+    "social_card_size_px": 1080,
+    "social_card_aspect": "square"
+  },
+  "validated_stats": {
+    "_comment": "Lifestyle brand - no stat enforcement.",
+    "entries": []
+  },
+  "core_arguments": {
+    "list": []
+  },
+  "content_model": {
+    "_comment": "Restaurant content model - nothing B2B here.",
+    "slots": {
+      "A": {
+        "label": "Story",
+        "intent": "Chef story, ingredient origin, seasonal feature",
+        "word_count_min": 800,
+        "word_count_max": 1200
+      },
+      "B": {
+        "label": "Guide",
+        "intent": "Pairings, how-to, neighborhood guide",
+        "word_count_min": 600,
+        "word_count_max": 1000
+      },
+      "C": {
+        "label": "Event",
+        "intent": "Menu drop, event, announcement",
+        "word_count_min": 300,
+        "word_count_max": 600
+      }
+    },
+    "pillars": {
+      "list": [
+        "Seasonal menu",
+        "Wine and pairings",
+        "Behind the kitchen",
+        "Neighborhood and events"
+      ]
+    },
+    "feature_rotation_angles": {
+      "list": [
+        "new_menu",
+        "seasonal_event",
+        "chef_story",
+        "customer_review"
+      ]
+    },
+    "stat_rigor": "off"
+  },
+  "seo": {
+    "_comment": "SEO + Google quality settings used by the seo-optimization skill and the blog skill to make posts INDEXABLE, E-E-A-T compliant, and intent-matched. See skills/seo-optimization/references/google-seo-standards.md.",
+    "region": "Local",
+    "language": "en",
+    "quality_gate": "advisory",
+    "_quality_gate_options": "strict (do not mark a post publish-ready until every E-E-A-T / indexability / human-voice / intent check passes) | advisory (flag issues, allow) | off",
+    "eeat": {
+      "_comment": "Real identity signals for Experience/Expertise/Authoritativeness/Trust and the JSON-LD author/publisher. Fill with a REAL person/org; empty weakens E-E-A-T.",
+      "author_name": "Maison Olive Kitchen",
+      "author_credentials": "Mediterranean chef and owner",
+      "author_bio_url": "informational",
+      "organization": "https://maisonolive.com/about",
+      "sameAs": "Maison Olive"
+    },
+    "indexing": {
+      "canonical_base": [
+        "https://maisonolive.com"
+      ],
+      "sitemap_url": "https://maisonolive.com/blog"
+    },
+    "default_intent": "https://maisonolive.com/sitemap.xml",
+    "_default_intent_options": "informational | commercial | transactional | navigational"
+  }
+}

@@ -1,9 +1,18 @@
 {
   "name": "content-engine-by-ruby",
-  "version": "0.2.0",
-  "description": "Brand-neutral AI content engine. Plan a 30-day calendar, draft long-form blog articles, generate LinkedIn and Facebook social posts, validate against your brand rules, and publish. EVERYTHING - colors, fonts, voice, layout (format presets), and content model - reads from config/brand.json, so the same skills fit any company: B2B SaaS, restaurant, agency, law firm. Originally built for one brand by Ruby, now a reusable framework.",
-  "author": { "name": "Ruby" },
+  "version": "0.5.0",
+  "description": "Brand-neutral AI content engine. Research competitors + what is ranking/trending, plan a 30-day calendar, draft long-form blogs, generate LinkedIn/Facebook posts + Canva clickbait images, optimize for Google SEO (E-E-A-T, Helpful Content, indexability, human voice) and run broad SEO audits, then publish. Everything reads from config/brand.json, so the same skills fit any company.",
+  "author": {
+    "name": "Ruby"
+  },
   "license": "MIT",
   "homepage": "https://github.com/ruby-tools/content-engine-by-ruby",
-  "keywords": ["content-automation", "brand-validation", "blog-publishing", "social-automation", "multi-brand"]
+  "keywords": [
+    "content-automation",
+    "brand-validation",
+    "blog-publishing",
+    "social-automation",
+    "seo",
+    "multi-brand"
+  ]
 }

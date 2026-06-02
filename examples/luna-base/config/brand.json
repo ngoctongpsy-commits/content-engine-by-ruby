@@ -1,0 +1,371 @@
+{
+  "_meta": {
+    "profile": "luna-base",
+    "description": "Luna Base AI - enterprise AI-native SDLC platform. This is the live brand config used by lunabase.ai. Author: Andy Pham (founder/CEO).",
+    "schema_version": "1.0",
+    "last_updated": "2026-05-29"
+  },
+  "company": {
+    "name": "Luna Base",
+    "domain": "lunabase.ai",
+    "tagline": "ENTERPRISE AI GOVERNANCE",
+    "url": "https://lunabase.ai",
+    "products": {
+      "ide": {
+        "name": "Luna Studio",
+        "url": "https://lunabase.ai/product/platform#studio",
+        "description": "Professional IDE with 6 Copilots powered by 10+ AI agents"
+      },
+      "no_code": {
+        "name": "Luna Autopilot",
+        "url": "https://lunabase.ai/product/platform#autopilot",
+        "description": "No-code, plain English to production app, Agentic Mode"
+      },
+      "marketplace": {
+        "name": "Luna Hub",
+        "url": "https://lunabase.ai/product/platform#hub",
+        "description": "Expert marketplace"
+      },
+      "community": {
+        "name": "Luna Station",
+        "url": "https://lunabase.ai/product/platform#station",
+        "description": "Community platform"
+      }
+    }
+  },
+  "palette": {
+    "primary": "#00FFA3",
+    "primary_dark": "#00CC82",
+    "primary_light": "#33FFB5",
+    "secondary": "#4FB3D9",
+    "secondary_light": "#87CEEB",
+    "background_primary": "#FEFEFE",
+    "background_soft": "#F8F7F5",
+    "background_dark": "#0A0E27",
+    "background_dark_2": "#0F1530",
+    "background_dark_3": "#141A3A",
+    "text_primary": "#2C2C2C",
+    "text_secondary": "#5A5A5A",
+    "text_on_dark": "#E8EDF2",
+    "text_on_dark_muted": "#8FA0B5",
+    "border_light": "#E5E5E5",
+    "surface_white": "#FFFFFF",
+    "urgency": "#FF6B6B",
+    "_logo_orb_gradient": {
+      "stop_0": "#00FFA3",
+      "stop_50": "#4FB3D9",
+      "stop_100": "#87CEEB"
+    },
+    "_forbidden_colors": {
+      "_comment": "Tailwind defaults that leak into AI-generated SVG. Validator hard-rejects.",
+      "hex": [
+        "#F59E0B",
+        "#EF4444",
+        "#8B5CF6",
+        "#10B981",
+        "#3B82F6",
+        "#EC4899",
+        "#F97316",
+        "#84CC16",
+        "#06B6D4",
+        "#A855F7",
+        "#D946EF",
+        "#0EA5E9",
+        "#5A6A7A"
+      ],
+      "rgba_prefixes": [
+        "rgba(245, 158, 11",
+        "rgba(239, 68, 68",
+        "rgba(139, 92, 246",
+        "rgba(16, 185, 129",
+        "rgba(59, 130, 246",
+        "rgba(236, 72, 153"
+      ]
+    }
+  },
+  "typography": {
+    "primary_font": "Inter, system-ui, -apple-system, sans-serif",
+    "body_font": "ui-serif, Georgia, serif",
+    "mono_font": "ui-monospace, 'JetBrains Mono', monospace",
+    "headline_weight": 600,
+    "body_size_px": 18,
+    "body_line_height": 1.85,
+    "body_max_width_px": 760
+  },
+  "voice": {
+    "accounts": {
+      "personal": {
+        "_use_for": "Andy Pham founder LinkedIn thought leadership",
+        "pronoun": "I",
+        "tone": "teaching, founder narrative, contrarian opinions, never directly promote product",
+        "promote_product_directly": false,
+        "author_name": "Andy Pham"
+      },
+      "company": {
+        "_use_for": "Luna Studio LinkedIn company page, Luna Base FB, blog posts",
+        "pronoun": "we",
+        "tone": "direct, technical, governance-first framing, CTAs allowed",
+        "promote_product_directly": true,
+        "author_name": "Andy Pham"
+      },
+      "newsletter": {
+        "_use_for": "Luna Newsletter contrarian editorial",
+        "pronoun": "I",
+        "tone": "high-opinion, debate, industry-controversy",
+        "promote_product_directly": false,
+        "author_name": "Andy Pham"
+      }
+    },
+    "forbidden_phrases": {
+      "ai_tells": [
+        "delve into",
+        "leverage",
+        "utilize",
+        "in conclusion",
+        "in today's rapidly evolving",
+        "in the ever-changing landscape",
+        "game-changing",
+        "cutting-edge",
+        "navigate the complexities",
+        "unleash the power",
+        "harness the power",
+        "tapestry",
+        "moreover",
+        "furthermore",
+        "comprehensive guide",
+        "embark on a journey",
+        "it is important to note",
+        "it is worth noting"
+      ],
+      "overclaims": [
+        "revolutionize",
+        "industry-leading",
+        "world-class",
+        "best-in-class",
+        "next-generation",
+        "10x better",
+        "unmatched",
+        "unprecedented"
+      ],
+      "generic_openers": [
+        "I hope this finds you well",
+        "I wanted to reach out",
+        "I'm excited to share"
+      ],
+      "_company_specific_bans": [
+        "Luna Intelligence",
+        "Dashboard Builder",
+        "Luna Base Research",
+        "Lunarbase"
+      ]
+    },
+    "required_phrasings": {
+      "approved_only_phrasings": [
+        "AI-native SDLC platform",
+        "AI-in-the-Loop",
+        "Human-Gated Development",
+        "Specification-Driven Development",
+        "Test-Driven Development",
+        "Behavior-Driven Development",
+        "Context Engineering"
+      ]
+    },
+    "forbidden_chars": {
+      "em_dash": true,
+      "en_dash": true,
+      "emoji": true,
+      "horizontal_divider": true
+    }
+  },
+  "svg_figure": {
+    "viewbox_width": 1200,
+    "viewbox_height": 750,
+    "safe_margin_left_px": 60,
+    "safe_margin_right_px": 1140,
+    "social_card_size_px": 1080,
+    "zones": {
+      "title_cluster_y_min": 30,
+      "title_cluster_y_max": 180,
+      "main_visual_y_min": 200,
+      "main_visual_y_max": 680,
+      "footer_y_min": 700,
+      "footer_y_max": 740
+    },
+    "footer_orb_cx": 70,
+    "footer_orb_cy": 710,
+    "footer_orb_r": 13,
+    "footer_wordmark_x": 92,
+    "footer_wordmark_y": 716,
+    "footer_tagline_x": 1140,
+    "footer_tagline_y": 716,
+    "min_animation_count_process_patterns": 6,
+    "max_animation_count_process_patterns": 12
+  },
+  "validated_stats": {
+    "_comment": "Pre-approved stats with citations. Numeric claims in feature_promo content MUST trace here.",
+    "entries": [
+      {
+        "stat": "76%",
+        "claim": "of developers are using or planning to use AI tools in 2024",
+        "source": "Stack Overflow Developer Survey 2024",
+        "url": "https://survey.stackoverflow.co/2024/ai"
+      },
+      {
+        "stat": "30%",
+        "claim": "of all code committed at Google was AI-suggested by 2024",
+        "source": "Sundar Pichai Q3 2024 earnings call",
+        "url": "https://abc.xyz/investor/"
+      },
+      {
+        "stat": "EUR 35M / 7%",
+        "claim": "maximum penalty for prohibited AI under EU AI Act Article 99(3)",
+        "source": "Regulation (EU) 2024/1689 Article 99(3)",
+        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"
+      },
+      {
+        "stat": "EUR 15M / 3%",
+        "claim": "maximum penalty for high-risk AI non-compliance under EU AI Act Article 99(4)",
+        "source": "Regulation (EU) 2024/1689 Article 99(4)",
+        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"
+      },
+      {
+        "stat": "2026-08-02",
+        "claim": "EU AI Act high-risk system requirements enforcement begins",
+        "source": "Regulation (EU) 2024/1689 Article 113",
+        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"
+      }
+    ]
+  },
+  "core_arguments": {
+    "list": [
+      "AI-assisted development without methodology produces unreviewable code at scale.",
+      "Specification-Driven Development is the only governance model that survives 10x AI throughput.",
+      "Six-copilot orchestration beats single-agent IDE assistants for enterprise SDLC.",
+      "Human-Gated Development is the boundary between AI-in-the-Loop and uncontrolled AI output.",
+      "Regulated industries cannot adopt AI coding without traceable specs and audit trails."
+    ]
+  },
+  "content_pillars": {
+    "primary": [
+      "AI Governance and Compliance",
+      "AI-Assisted SDLC Methodology",
+      "Enterprise AI Coding Adoption",
+      "AI Coding Tool Comparison"
+    ]
+  },
+  "format": {
+    "_comment": "Luna Base look = editorial-dark, stated explicitly so it is preserved exactly even if template defaults change.",
+    "preset": "editorial-dark",
+    "blog": {
+      "hero_style": "dark",
+      "body_style": "serif-editorial",
+      "heading_numbering": true,
+      "references_style": "apa",
+      "cta": {
+        "enabled": true
+      },
+      "figures": {
+        "enabled": true,
+        "type": "svg-data",
+        "count_by_slot": {
+          "A": 3,
+          "B": 2,
+          "C": 1
+        },
+        "footer_branding": "orb-wordmark"
+      },
+      "seo": {
+        "json_ld": true,
+        "open_graph": true,
+        "twitter_card": true
+      }
+    },
+    "social": {
+      "card_branding": "orb-wordmark",
+      "card_size_px": 1080,
+      "card_aspect": "square"
+    },
+    "images": {
+      "_comment": "Where the THUMBNAIL and SOCIAL images come from. provider 'canva' = Claude writes a fresh clickbait prompt per piece and generates the image with the connected Canva tools at session time, then exports PNG. provider 'svg' = legacy inline SVG. NOTE: in-article blog figures are ALWAYS SVG regardless. Sizes verified June 2026.",
+      "provider": "canva",
+      "_provider_options": "canva (requires the Canva connector) | svg (no external dependency)",
+      "style": "clickbait",
+      "_style_note": "Header may carry one short, bold clickbait HEADLINE (<=8 words, real wording). The ONLY brand wordmark allowed is exactly company.domain, small in a bottom-corner FOOTER - no tagline, no other text, no numbers unless real. Method: let Canva generate the visual + headline + wordmark, then AUDIT the editable text - fix the headline if mangled, make the wordmark read exactly company.domain, and DELETE any junk/gibberish/duplicate text - then commit. Never trust the generator spelling.",
+      "sizes": {
+        "blog_thumbnail_px": "1200x630",
+        "_blog_thumbnail_note": "Open Graph / link-preview standard (1.91:1). Keep headline + faces in center 1080x600 safe zone.",
+        "linkedin_px": "1200x1200",
+        "_linkedin_note": "Square feed image for strong presence. Landscape/link alt: 1200x627.",
+        "facebook_px": "1080x1350",
+        "_facebook_note": "Portrait 4:5 for max mobile real estate. Square alt: 1080x1080; landscape/link alt: 1200x630."
+      }
+    }
+  },
+  "content_model": {
+    "_comment": "Luna Base B2B model. Slots, angles, and strict stat rigor preserved from the original hardcoded behavior.",
+    "slots": {
+      "A": {
+        "label": "Foundational",
+        "intent": "Definitions, complete guides, category-defining theses",
+        "word_count_min": 2200,
+        "word_count_max": 2500
+      },
+      "B": {
+        "label": "Comparison",
+        "intent": "Comparisons / how-to / mid-funnel",
+        "word_count_min": 1500,
+        "word_count_max": 1800
+      },
+      "C": {
+        "label": "News commentary",
+        "intent": "Current events, breaking news takes",
+        "word_count_min": 1000,
+        "word_count_max": 1400
+      }
+    },
+    "pillars": {
+      "_comment": "Carried over from content_pillars.primary.",
+      "list": [
+        "AI Governance and Compliance",
+        "AI-Assisted SDLC Methodology",
+        "Enterprise AI Coding Adoption",
+        "AI Coding Tool Comparison"
+      ]
+    },
+    "feature_rotation_angles": {
+      "_comment": "Original Luna Base monthly feature angles.",
+      "list": [
+        "copilot",
+        "capability_deep_dive",
+        "customer_proof",
+        "deployment_moat",
+        "regulatory"
+      ]
+    },
+    "stat_rigor": "strict"
+  },
+  "seo": {
+    "_comment": "SEO + Google quality settings used by the seo-optimization skill and the blog skill to make posts INDEXABLE, E-E-A-T compliant, and intent-matched. See skills/seo-optimization/references/google-seo-standards.md.",
+    "region": "US and Western Europe",
+    "language": "en",
+    "quality_gate": "strict",
+    "_quality_gate_options": "strict (do not mark a post publish-ready until every E-E-A-T / indexability / human-voice / intent check passes) | advisory (flag issues, allow) | off",
+    "eeat": {
+      "_comment": "Real identity signals for Experience/Expertise/Authoritativeness/Trust and the JSON-LD author/publisher. Fill with a REAL person/org; empty weakens E-E-A-T.",
+      "author_name": "Luna Base",
+      "author_credentials": "Enterprise AI governance team",
+      "author_bio_url": "commercial",
+      "organization": "https://lunabase.ai/about",
+      "sameAs": "Luna Base"
+    },
+    "indexing": {
+      "canonical_base": [
+        "https://www.linkedin.com/company/lunabase",
+        "https://lunabase.ai"
+      ],
+      "sitemap_url": "https://lunabase.ai/blog"
+    },
+    "default_intent": "https://lunabase.ai/sitemap.xml",
+    "_default_intent_options": "informational | commercial | transactional | navigational"
+  }
+}

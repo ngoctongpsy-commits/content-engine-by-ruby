@@ -1,0 +1,116 @@
+{
+  "_meta": {
+    "profile": "luna-base",
+    "description": "Luna Base channels config. Real Directus + Make.com + Telegram setup used by lunabase.ai.",
+    "schema_version": "1.0",
+    "_secrets_note": "Tokens live in gitignored sibling files: .cms-token, .make-webhook-url, .make-api-config, .notify-config"
+  },
+
+  "cms": {
+    "provider": "directus",
+    "base_url": "https://api.lunabase.ai",
+    "token_file": ".cms-token",
+    "posts_collection": "posts",
+    "fields": {
+      "slug": "slug",
+      "title": "title",
+      "description": "description",
+      "body_html": "body_html",
+      "thumbnail": "thumbnail",
+      "keywords": "keywords",
+      "author": "author",
+      "status": "status",
+      "published_at": "published_at"
+    },
+    "default_status": "published",
+    "public_url_pattern": "https://lunabase.ai/blog/{slug}",
+    "image_url_pattern": "https://api.lunabase.ai/assets/{uuid}.png"
+  },
+
+  "social": {
+    "make_webhook_url_file": ".make-webhook-url",
+    "make_api_token_file": ".make-api-config",
+    "make_scenario_id": null,
+    "make_base_url": "https://us2.make.com/api/v2",
+    "make_verify_wait_seconds": 90,
+
+    "channels": {
+      "linkedin_company": {
+        "enabled": true,
+        "_description": "Luna Studio LinkedIn company page",
+        "voice_account": "company",
+        "webhook_payload_extra": {
+          "channel": "linkedin_company"
+        }
+      },
+      "facebook_page": {
+        "enabled": true,
+        "_description": "Luna Base Facebook page",
+        "voice_account": "company",
+        "webhook_payload_extra": {
+          "channel": "facebook_page"
+        }
+      },
+      "linkedin_personal": {
+        "enabled": false,
+        "_description": "Andy Pham personal LinkedIn (separate workflow, not built into weekly packet)",
+        "voice_account": "personal"
+      },
+      "x_twitter": {
+        "enabled": false,
+        "_description": "X/Twitter (not currently active)",
+        "voice_account": "company"
+      }
+    }
+  },
+
+  "schedule": {
+    "_timezone_publish": "Asia/Kolkata",
+    "_timezone_generation": "Asia/Ho_Chi_Minh",
+    "blog_draft_generation": {
+      "cron": "0 2 * * *",
+      "_label": "02:02 Vietnam time = 00:32 IST",
+      "_description": "Generate 3 next-day drafts (Slot A, B, C)"
+    },
+    "blog_publish_slot_a": {
+      "cron": "30 9 * * *",
+      "_label": "09:30 IST = 11:00 VN",
+      "_description": "Foundational long-form publish"
+    },
+    "blog_publish_slot_b": {
+      "cron": "30 13 * * *",
+      "_label": "13:30 IST = 15:00 VN",
+      "_description": "Comparison / how-to publish"
+    },
+    "blog_publish_slot_c": {
+      "cron": "30 17 * * *",
+      "_label": "17:30 IST = 19:00 VN",
+      "_description": "News commentary publish"
+    },
+    "weekly_social_generation": {
+      "cron": "0 21 * * 1",
+      "_label": "Mon 21:00 VN = Mon 19:30 IST",
+      "_description": "Cowork generates JSON packet"
+    },
+    "weekly_social_posting": {
+      "cron": "30 11 * * 2",
+      "_label": "Tue 11:30 VN = Tue 10:00 IST",
+      "_description": "Windows host fires Make webhooks (LinkedIn India peak)"
+    }
+  },
+
+  "notifications": {
+    "telegram": {
+      "enabled": true,
+      "config_file": ".notify-config",
+      "alert_on_publish_success": true,
+      "alert_on_publish_failure": true,
+      "alert_on_social_post_success": true,
+      "alert_on_social_post_failure": true,
+      "alert_on_validation_rejection": true,
+      "mute_known_transient_errors": [
+        "403 from Google Indexing API (DNS verification pending)"
+      ]
+    }
+  }
+}

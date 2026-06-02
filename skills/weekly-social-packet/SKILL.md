@@ -17,7 +17,7 @@ or house style is assumed.
 
 ### Step 1 - Read configs
 
-Read `config/brand.json` for `voice.*`, `palette.*`, `format.social.*`, `content_model.*`, `validated_stats.*`.
+Read `config/brand.json` for `voice.*`, `palette.*`, `format.social.*`, `format.images.*`, `content_model.*`, `validated_stats.*`.
 
 Read `config/channels.json` for enabled `social.channels.*` destinations and `social.make_webhook_url_file`.
 
@@ -50,15 +50,17 @@ Read the current month's row in the content-calendar feature rotation table. Ext
 
 Adapt audience and register to the brand's tone string - do not assume "CTOs / VP Engineering" unless that is the brand's audience.
 
-### Step 5 - Generate social card SVG
+### Step 5 - Generate the social image (provider-aware)
 
-Size from `format.social.card_size_px` (default 1080) and `format.social.card_aspect` (default square). Use `palette.*` colors. Choose a pattern based on argument shape (Stat Bomb / Versus Split / Anti-Pattern / Tier Diagram / Question Hook / Timeline Marker). Self-validate against brand rules (no forbidden colors, no forbidden chars).
+Resolve `format.images.provider`:
 
-Apply footer branding per `format.social.card_branding`:
-- `orb-wordmark`: orb + `company.domain` + `company.tagline`
-- `wordmark`: `company.domain` only
-- `logo`: brand logo if available, else wordmark
-- `none`: no footer branding
+**`canva` (clickbait images, recommended):** generate TWO clickbait images with the connected Canva tools - one for LinkedIn, one for Facebook - sized per `format.images.sizes` (LinkedIn `linkedin_px` default 1200x1200; Facebook `facebook_px` default 1080x1350). Read `references/canva-images.md` for the prompt recipe and steps. In short: compose a fresh clickbait prompt from this week's angle (the blog's sharpest claim for blog_driver, or the feature angle for feature_promo), generate + resize to the exact size, export PNG, and save:
+- `outputs/social/pending/weekly-YYYY-MM-DD.linkedin.png`
+- `outputs/social/pending/weekly-YYYY-MM-DD.facebook.png`
+
+The two can share the same concept/headline, just re-laid-out for each aspect ratio. The post script auto-detects these PNGs and posts them (one per channel), falling back to SVG only if missing.
+
+**`svg` (legacy):** generate one social card SVG. Size from `format.social.card_size_px` (default 1080) and `format.social.card_aspect`. Use `palette.*` colors and a pattern (Stat Bomb / Versus Split / Anti-Pattern / Tier Diagram / Question Hook / Timeline Marker). Apply footer branding per `format.social.card_branding` (`orb-wordmark` | `wordmark` | `logo` | `none`).
 
 ### Step 6 - Output JSON
 
@@ -80,16 +82,21 @@ Write packet to `outputs/social/pending/weekly-YYYY-MM-DD.json`:
   "facebook_post": "...",
   "image_alt": "...",
   "image_title": "...",
-  "image_pattern": "stat_bomb|versus_split|...",
-  "clickbait_svg": "<full SVG XML>"
+  "image_provider": "canva | svg",
+  "image_linkedin_path": "outputs/social/pending/weekly-YYYY-MM-DD.linkedin.png",
+  "image_facebook_path": "outputs/social/pending/weekly-YYYY-MM-DD.facebook.png",
+  "image_pattern": "stat_bomb|versus_split|...  (svg provider only)",
+  "clickbait_svg": "<full SVG XML>  (svg provider only; omit for canva)"
 }
 ```
 
 ### Step 7 - Self-validate
 
 Brand validators (forbidden phrases, forbidden colors). Numeric claims honor `content_model.stat_rigor`:
-- `strict`/`cited`: for blog_driver every number in the card must appear in `blog_html`; for feature_promo every number must be in `validated_stats.entries`. If you cannot source a number, pick a pattern without numbers (Question Hook, Tier Diagram).
+- `strict`/`cited`: any number shown in the image must be real - for blog_driver it must appear in `blog_html`; for feature_promo in `validated_stats.entries`. If you cannot source a number, use a curiosity/headline angle with no number.
 - `off`: no numeric enforcement.
+
+If provider is `canva`: confirm both PNGs exist at the configured sizes, headline <= 8 words, no fabricated stats, no emoji (if forbidden). If provider is `svg`: validate the SVG as before.
 
 Reject + regenerate on any failure.
 
@@ -97,6 +104,6 @@ Reject + regenerate on any failure.
 
 - Assuming B2B angles or a CTO audience - read them from config.
 - Inventing stats when stat_rigor is strict/cited.
-- Same pattern as last week's card.
+- Same concept/headline as last week's image.
 - Mixing two account voices in one post.
 - Forbidden chars (em/en dash, emoji) when `voice.forbidden_chars` enables them.

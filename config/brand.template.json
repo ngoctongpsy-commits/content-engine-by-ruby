@@ -1,6 +1,5 @@
 {
   "_comment": "Brand identity config — single source of truth for the entire content engine. Fill all fields before first run. NOTHING in the engine is locked to any one company: colors, fonts, voice, layout (see 'format'), and content model (see 'content_model') all come from this file. See examples/luna-base/ (B2B, editorial-dark) and examples/restaurant/ (lifestyle, magazine-light) for two very different completed references.",
-
   "company": {
     "name": "YOUR_COMPANY_NAME",
     "domain": "yourdomain.com",
@@ -11,7 +10,6 @@
       "forbidden_substitutions": []
     }
   },
-
   "palette": {
     "_comment": "All hex values. Used by SVG figures, blog HTML, social cards.",
     "primary": "#XXXXXX",
@@ -33,11 +31,24 @@
     },
     "_forbidden_colors": {
       "_comment": "Tailwind defaults or off-brand colors that MUST NOT appear. Validator rejects SVG/HTML containing these. Edit to match YOUR brand; the list below are generic Tailwind defaults.",
-      "hex": ["#F59E0B", "#EF4444", "#8B5CF6", "#10B981", "#3B82F6", "#EC4899"],
-      "rgba_prefixes": ["rgba(245,158,", "rgba(239,68,", "rgba(139,92,", "rgba(16,185,", "rgba(59,130,", "rgba(236,72,"]
+      "hex": [
+        "#F59E0B",
+        "#EF4444",
+        "#8B5CF6",
+        "#10B981",
+        "#3B82F6",
+        "#EC4899"
+      ],
+      "rgba_prefixes": [
+        "rgba(245,158,",
+        "rgba(239,68,",
+        "rgba(139,92,",
+        "rgba(16,185,",
+        "rgba(59,130,",
+        "rgba(236,72,"
+      ]
     }
   },
-
   "typography": {
     "primary_font": "Inter, system-ui, sans-serif",
     "body_font": "ui-sans-serif, system-ui, sans-serif",
@@ -46,13 +57,16 @@
     "body_line_height": 1.7,
     "body_max_width_px": 760
   },
-
   "format": {
     "_comment": "VISUAL + STRUCTURAL layout of every blog/social output. THIS is what makes the engine reusable across very different brands (B2B SaaS, restaurant, agency, law firm). Pick a preset, then override any field. See skills/brand-locked-blog-writing/references/format-presets.md for what each preset expands to. Nothing here is locked to any one company.",
     "preset": "minimal-clean",
-    "_presets_available": ["editorial-dark", "magazine-light", "minimal-clean", "custom"],
+    "_presets_available": [
+      "editorial-dark",
+      "magazine-light",
+      "minimal-clean",
+      "custom"
+    ],
     "_preset_note": "If preset is anything other than 'custom', the skill resolves any field left null below from the preset. Set preset to 'custom' to control every field yourself. A non-null field here ALWAYS overrides the preset.",
-
     "blog": {
       "hero_style": null,
       "_hero_style_options": "dark (dark band, light text) | light (light band, dark text) | image (full-bleed photo + overlaid title) | none (just an H1, no hero band)",
@@ -83,15 +97,28 @@
         "_comment": "Generic SEO metadata. Safe to leave on for any brand."
       }
     },
-
     "social": {
       "card_branding": null,
       "_card_branding_options": "orb-wordmark | wordmark | logo | none",
       "card_size_px": 1080,
       "card_aspect": "square"
+    },
+    "images": {
+      "_comment": "Where the THUMBNAIL and SOCIAL images come from. provider 'canva' = Claude writes a fresh clickbait prompt per piece and generates the image with the connected Canva tools at session time, then exports PNG. provider 'svg' = legacy inline SVG. NOTE: in-article blog figures are ALWAYS SVG regardless of this setting. Sizes verified June 2026.",
+      "provider": "svg",
+      "_provider_options": "canva (requires the Canva connector) | svg (no external dependency)",
+      "style": "clickbait",
+      "_style_note": "Header may carry one short, bold clickbait HEADLINE (<=8 words, real wording). The ONLY brand wordmark allowed is exactly company.domain, small in a bottom-corner FOOTER - no tagline, no other text, no numbers unless real. Method: let Canva generate the visual + headline + wordmark, then AUDIT the editable text - fix the headline if mangled, make the wordmark read exactly company.domain, and DELETE any junk/gibberish/duplicate text - then commit. Never trust the generator spelling.",
+      "sizes": {
+        "blog_thumbnail_px": "1200x630",
+        "_blog_thumbnail_note": "Open Graph / link-preview standard (1.91:1). Keep headline + faces in the center 1080x600 safe zone.",
+        "linkedin_px": "1200x1200",
+        "_linkedin_note": "Square feed image for strong presence. Standard landscape/link alt: 1200x627.",
+        "facebook_px": "1080x1350",
+        "_facebook_note": "Portrait 4:5 for max mobile real estate. Square alt: 1080x1080; landscape/link alt: 1200x630."
+      }
     }
   },
-
   "voice": {
     "_comment": "Account-based content strategy. Define ONE or MORE accounts your brand posts as. The default active account for blog writing is set by 'default_account'. The three accounts below are an EXAMPLE structure (B2B founder model); rename, remove, or add accounts to fit your brand.",
     "default_account": "company",
@@ -117,9 +144,29 @@
     },
     "forbidden_phrases": {
       "_comment": "AI tells + generic LLM phrases. Hard reject by validator. Edit to taste.",
-      "ai_tells": ["delve into", "utilize", "leverage (as verb)", "game-changing", "in conclusion", "touch base", "it is worth noting"],
-      "overclaims": ["best in market", "best-in-class", "world-class", "industry-leading", "revolutionary", "disruptive", "zero competition"],
-      "generic_openers": ["I hope this finds you well", "In today's rapidly evolving landscape", "Exciting news"]
+      "ai_tells": [
+        "delve into",
+        "utilize",
+        "leverage (as verb)",
+        "game-changing",
+        "in conclusion",
+        "touch base",
+        "it is worth noting"
+      ],
+      "overclaims": [
+        "best in market",
+        "best-in-class",
+        "world-class",
+        "industry-leading",
+        "revolutionary",
+        "disruptive",
+        "zero competition"
+      ],
+      "generic_openers": [
+        "I hope this finds you well",
+        "In today's rapidly evolving landscape",
+        "Exciting news"
+      ]
     },
     "required_phrasings": {
       "_comment": "Brand-locked phrasings that ARE allowed even though they look like overclaims",
@@ -132,7 +179,6 @@
       "emoji": true
     }
   },
-
   "svg_figure": {
     "_comment": "Canonical viewBox for blog figures. Only used when format.blog.figures.enabled is true.",
     "viewbox_width": 1200,
@@ -150,38 +196,67 @@
     "social_card_size_px": 1080,
     "social_card_aspect": "square"
   },
-
   "validated_stats": {
     "_comment": "Pre-approved stats with citations. When content_model.stat_rigor is 'strict', the validator hard-rejects any numeric claim NOT in this list. Each entry: claim, source, year, usage_note. Leave empty for lifestyle/brand content (set stat_rigor to 'off' or 'cited').",
     "entries": []
   },
-
   "core_arguments": {
     "_comment": "5-7 core thesis statements used as the spine of any content. Leave empty if your brand does not push a fixed thesis.",
     "list": []
   },
-
   "content_model": {
     "_comment": "WHAT KIND of content this brand publishes. The old 'foundational/comparison/news' slots and 'copilot/customer_proof/regulatory' angles were B2B-SaaS specific. Define your own here so the planner and social skills fit YOUR business.",
-
     "slots": {
       "_comment": "Three daily publishing slots. Re-label intent + length for your brand. Examples below are neutral; replace freely.",
-      "A": { "label": "Cornerstone", "intent": "Definitive / evergreen piece", "word_count_min": 1600, "word_count_max": 2200 },
-      "B": { "label": "Practical", "intent": "How-to / comparison / guide", "word_count_min": 1100, "word_count_max": 1500 },
-      "C": { "label": "Timely", "intent": "News / seasonal / quick take", "word_count_min": 700, "word_count_max": 1100 }
+      "A": {
+        "label": "Cornerstone",
+        "intent": "Definitive / evergreen piece",
+        "word_count_min": 1600,
+        "word_count_max": 2200
+      },
+      "B": {
+        "label": "Practical",
+        "intent": "How-to / comparison / guide",
+        "word_count_min": 1100,
+        "word_count_max": 1500
+      },
+      "C": {
+        "label": "Timely",
+        "intent": "News / seasonal / quick take",
+        "word_count_min": 700,
+        "word_count_max": 1100
+      }
     },
-
     "pillars": {
       "_comment": "3-5 core content domains for this brand. Planner distributes evenly across these. Empty => planner asks you.",
       "list": []
     },
-
     "feature_rotation_angles": {
       "_comment": "Recurring promo angles for the monthly feature post. B2B example: product_spotlight, customer_proof, differentiation, compliance. Restaurant example: new_menu, seasonal_event, chef_story, customer_review. Define YOUR angles. Empty => social skill skips feature rotation.",
       "list": []
     },
-
     "stat_rigor": "cited",
     "_stat_rigor_options": "strict (every number must be in validated_stats.entries; for data-heavy B2B) | cited (numbers allowed if cited inline with a real source) | off (no numeric-claim enforcement; for lifestyle/brand content)"
+  },
+  "seo": {
+    "_comment": "SEO + Google quality settings used by the seo-optimization skill and the blog skill to make posts INDEXABLE, E-E-A-T compliant, and intent-matched. See skills/seo-optimization/references/google-seo-standards.md.",
+    "region": "US",
+    "language": "en",
+    "quality_gate": "strict",
+    "_quality_gate_options": "strict (do not mark a post publish-ready until every E-E-A-T / indexability / human-voice / intent check passes) | advisory (flag issues, allow) | off",
+    "eeat": {
+      "_comment": "Real identity signals for Experience/Expertise/Authoritativeness/Trust and the JSON-LD author/publisher. Fill with a REAL person/org; empty weakens E-E-A-T.",
+      "author_name": "",
+      "author_credentials": "",
+      "author_bio_url": "informational",
+      "organization": "",
+      "sameAs": ""
+    },
+    "indexing": {
+      "canonical_base": [],
+      "sitemap_url": "https://yourdomain.com"
+    },
+    "default_intent": "https://yourdomain.com/sitemap.xml",
+    "_default_intent_options": "informational | commercial | transactional | navigational"
   }
 }

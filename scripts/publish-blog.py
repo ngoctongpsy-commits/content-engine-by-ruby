@@ -513,13 +513,23 @@ def main():
         sys.exit(1)
     print(f"[publish] validation: ok", flush=True)
 
-    # Pick best figure + render thumbnail
-    figures = extract_figures(html)
-    idx, best_svg, best_score = pick_best_figure(figures)
+    # Thumbnail: prefer a Canva sidecar PNG (format.images.provider 'canva'); else best in-article SVG figure.
     thumbnail_id = None
-    if best_svg:
-        print(f"[publish] picked figure {idx+1}/{len(figures)} (score={best_score:.1f}) for thumbnail", flush=True)
-        png = render_svg_to_png(best_svg, width=1200)
+    png = None
+    canva_thumb = draft_path.with_suffix(".thumb.png")
+    if canva_thumb.exists():
+        png = canva_thumb.read_bytes()
+        print(f"[publish] using Canva thumbnail {canva_thumb.name} ({len(png)/1024:.1f} KB)", flush=True)
+    else:
+        figures = extract_figures(html)
+        idx, best_svg, best_score = pick_best_figure(figures)
+        if best_svg:
+            print(f"[publish] no Canva thumbnail; picked figure {idx+1}/{len(figures)} (score={best_score:.1f})", flush=True)
+            png = render_svg_to_png(best_svg, width=1200)
+        else:
+            print("[publish] no Canva thumbnail and no SVG figures - publishing without thumbnail", flush=True)
+
+    if png is not None:
         if args.dry_run:
             preview = drafts_dir(plugin_root, args.profile) / f"_preview-{slug}.png"
             preview.write_bytes(png)
@@ -533,8 +543,6 @@ def main():
         else:
             thumbnail_id = upload_thumbnail(channels, plugin_root, args.profile, png, f"{slug}.png")
             print(f"[publish] thumbnail uploaded: {thumbnail_id}", flush=True)
-    else:
-        print("[publish] no SVG figures found - publishing without thumbnail", flush=True)
 
     # Build + POST payload
     payload = build_post_payload(channels, brand, html, slug, thumbnail_id)

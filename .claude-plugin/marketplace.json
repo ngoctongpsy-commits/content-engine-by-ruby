@@ -6,16 +6,26 @@
   },
   "metadata": {
     "description": "Ruby's content automation marketplace. Brand-neutral content engine usable across any company.",
-    "version": "0.2.0"
+    "version": "0.5.0"
   },
   "plugins": [
     {
       "name": "content-engine-by-ruby",
       "source": "./",
-      "description": "Brand-neutral AI content engine: plan a 30-day calendar, draft long-form blogs, generate LinkedIn/Facebook posts, validate against brand rules, publish to CMS or GitHub. Layout + content model are config-driven (format presets), so the same engine fits B2B SaaS, restaurants, agencies.",
-      "version": "0.2.0",
-      "author": { "name": "Ruby" },
-      "keywords": ["content-automation", "brand-validation", "blog-publishing", "social-automation", "multi-brand"]
+      "description": "Brand-neutral AI content engine: competitor + trend research, 30-day calendar, long-form blogs, LinkedIn/Facebook posts, Canva clickbait images, Google SEO quality gate + broad SEO audit (E-E-A-T, Helpful Content, indexability, Core Web Vitals, competitor/content-gap). Config-driven; CMS or GitHub publishing.",
+      "version": "0.5.0",
+      "author": {
+        "name": "Ruby"
+      },
+      "keywords": [
+        "content-automation",
+        "brand-validation",
+        "blog-publishing",
+        "social-automation",
+        "multi-brand",
+        "seo",
+        "competitor-research"
+      ]
     }
   ]
 }

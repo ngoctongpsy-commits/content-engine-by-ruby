@@ -30,6 +30,10 @@ Read the active `config/channels.json` (or template) for `schedule.blog_publish_
 
 If `content_model.pillars.list` is non-empty, use those pillars. If empty, ask the user for 3-5 core content domains for their brand, then offer to save them into `content_model.pillars.list`.
 
+### Step 2.5 - Pull competitor + trend signals (optional but recommended)
+
+If the user wants topics informed by what is ranking/trending or by competitors, run (or reuse output from) the `competitor-trend-research` skill first. Use its beat-the-SERP briefs to choose topics with proven demand and a clear angle to win - not generic guesses. Keep every topic tied to a brand pillar.
+
 ### Step 3 - Read existing calendar
 
 If `config/content-calendar.md` exists, read it. Note pillars in rotation, recent topics, and sub-topic exhaustion (avoid the same sub-topic 3 weeks running). If none exists, start fresh.

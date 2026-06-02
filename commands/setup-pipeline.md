@@ -35,6 +35,14 @@ Ask: "Which layout fits your brand?" and explain the presets (see
 
 Set `format.preset` accordingly. If they want tweaks (e.g. "magazine-light but keep figures off"), set the specific `format.blog.*` override.
 
+## Step 3.5 - Images (thumbnail + social)
+
+Ask: "How should blog thumbnails and LinkedIn/Facebook images be made?"
+- **canva** - Claude generates clickbait images via the connected Canva connector at verified sizes (blog 1200x630, LinkedIn 1200x1200, Facebook 1080x1350). Requires the Canva connector. Set `format.images.provider` to `canva`.
+- **svg** - built-in SVG figures (no external tool). Default.
+
+In-article blog figures stay SVG either way. Confirm the Canva connector is connected if they pick canva.
+
 ## Step 4 - Content model
 
 Ask:
@@ -42,6 +50,16 @@ Ask:
 2. What each daily slot A/B/C should be (or accept the neutral Cornerstone/Practical/Timely defaults) -> `content_model.slots`
 3. Monthly feature angles, if any (e.g. new_menu, customer_proof) -> `content_model.feature_rotation_angles.list` (empty is fine)
 4. Stat rigor: strict / cited / off (default cited; use off for lifestyle brands)
+
+## Step 4.5 - SEO + Google quality
+
+Ask:
+1. Region + language for SEO (e.g. US / en).
+2. Author identity for E-E-A-T: real author name + credentials + organization + profile/About URL + social links (sameAs). This powers the JSON-LD author/publisher and Google's trust signals -> `seo.eeat`.
+3. Canonical base URL + sitemap URL -> `seo.indexing`.
+4. Quality gate: strict (block publish until E-E-A-T / indexability / human-voice / intent all pass) or advisory. Default strict for SEO-driven brands.
+
+Goal: posts must actually get INDEXED by Google and rank, not just read well. See skills/seo-optimization/references/google-seo-standards.md.
 
 ## Step 5 - Channels
 

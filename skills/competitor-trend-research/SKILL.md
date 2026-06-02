@@ -56,3 +56,10 @@ Produce, per recommended topic, a brief the blog skill can write straight from:
 - Chasing trends with no link to the brand's pillars.
 - Recommending high-volume keywords whose intent does not fit the business.
 - Citing competitor stats as fact without verifying the primary source.
+
+## Engine-wide operating rules
+
+Before acting, follow the cross-cutting red-lines and routing in
+`knowledge/playbook.md` (ads = paused drafts only / never spend, SEO human-voice + E-E-A-T
+gate, publishing is opt-in, no invented facts, publisher fallback routing). Brand-specific
+rules still come from `config/brand.json`; the playbook governs what applies to every brand.

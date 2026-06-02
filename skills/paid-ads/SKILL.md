@@ -48,3 +48,10 @@ Summarize: what was drafted (ids/links), proposed budget + targeting, and the ex
 - Launching, unpausing, confirming budget, or entering payment - NEVER. Drafts only.
 - Assumed audience/industry; keyword stuffing; fabricated claims/stats; policy-risky superlatives.
 - Creating live spend "to test". Always paused; the user launches.
+
+## Engine-wide operating rules
+
+Before acting, follow the cross-cutting red-lines and routing in
+`knowledge/playbook.md` (ads = paused drafts only / never spend, SEO human-voice + E-E-A-T
+gate, publishing is opt-in, no invented facts, publisher fallback routing). Brand-specific
+rules still come from `config/brand.json`; the playbook governs what applies to every brand.

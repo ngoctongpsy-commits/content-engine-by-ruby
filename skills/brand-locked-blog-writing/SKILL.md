@@ -175,3 +175,10 @@ Write final HTML to `outputs/blogs/draft-YYYY-MM-DD-slot-{X}-{slug}.html`. If yo
 - Generic 4-card / 6-card rect grids in SVG - use illustration instead.
 - Stacking 16+ animations in SVG - only process patterns animate (max 6-12); static patterns have 0.
 - Same SVG pattern on consecutive days at the same slot - apply rotation per svg-patterns.md.
+
+## Engine-wide operating rules
+
+Before acting, follow the cross-cutting red-lines and routing in
+`knowledge/playbook.md` (ads = paused drafts only / never spend, SEO human-voice + E-E-A-T
+gate, publishing is opt-in, no invented facts, publisher fallback routing). Brand-specific
+rules still come from `config/brand.json`; the playbook governs what applies to every brand.

@@ -59,3 +59,10 @@ Write the brief to `outputs/campaigns/<campaign-slug>.md` and the campaign calen
 - Channels the brand has not enabled, or an assumed audience/industry.
 - Fabricated KPIs/benchmarks or stats (honor stat_rigor).
 - Over-indexing one channel; no phasing; ignoring the fixed date / dependencies.
+
+## Engine-wide operating rules
+
+Before acting, follow the cross-cutting red-lines and routing in
+`knowledge/playbook.md` (ads = paused drafts only / never spend, SEO human-voice + E-E-A-T
+gate, publishing is opt-in, no invented facts, publisher fallback routing). Brand-specific
+rules still come from `config/brand.json`; the playbook governs what applies to every brand.

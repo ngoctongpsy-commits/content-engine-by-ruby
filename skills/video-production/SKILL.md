@@ -61,3 +61,10 @@ Return: the script/storyboard, the generated clip URL(s) per platform/aspect, an
 - Fabricated stats or claims in the script.
 - Auto-posting - this skill is on-demand; the user reviews and posts.
 - Ignoring credits - a free Higgsfield plan has 0 credits and generation will fail.
+
+## Engine-wide operating rules
+
+Before acting, follow the cross-cutting red-lines and routing in
+`knowledge/playbook.md` (ads = paused drafts only / never spend, SEO human-voice + E-E-A-T
+gate, publishing is opt-in, no invented facts, publisher fallback routing). Brand-specific
+rules still come from `config/brand.json`; the playbook governs what applies to every brand.

@@ -1,12 +1,12 @@
 {
   "name": "content-engine-by-ruby",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "Brand-neutral AI marketing engine. Plan campaigns + paid ads (Meta/Facebook + Google, paused drafts), research competitors/trends, plan a calendar, draft blogs, generate Canva images + Higgsfield videos, write per-platform social posts and publish via Make.com, and optimize for Google SEO. Everything reads from config/brand.json.",
   "author": {
     "name": "Ruby"
   },
   "license": "MIT",
-  "homepage": "https://github.com/ruby-tools/content-engine-by-ruby",
+  "homepage": "https://github.com/ngoctongpsy-commits/content-engine-by-ruby",
   "keywords": [
     "content-automation",
     "brand-validation",
@@ -14,5 +14,6 @@
     "social-automation",
     "seo",
     "multi-brand"
-  ]
+  ],
+  "repository": "https://github.com/ngoctongpsy-commits/content-engine-by-ruby"
 }

@@ -113,3 +113,10 @@ Reject + regenerate on any failure.
 - Same concept/headline as last week's image.
 - Mixing two account voices in one post.
 - Forbidden chars (em/en dash, emoji) when `voice.forbidden_chars` enables them.
+
+## Engine-wide operating rules
+
+Before acting, follow the cross-cutting red-lines and routing in
+`knowledge/playbook.md` (ads = paused drafts only / never spend, SEO human-voice + E-E-A-T
+gate, publishing is opt-in, no invented facts, publisher fallback routing). Brand-specific
+rules still come from `config/brand.json`; the playbook governs what applies to every brand.

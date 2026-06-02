@@ -90,3 +90,10 @@ Write the calendar to `config/content-calendar.md` (or append a new section). No
 - Same pillar 3 days in a row.
 - Inventing feature angles the brand never configured.
 - More than ~30% of slots on the shortest/timeliest slot - keep evergreen depth.
+
+## Engine-wide operating rules
+
+Before acting, follow the cross-cutting red-lines and routing in
+`knowledge/playbook.md` (ads = paused drafts only / never spend, SEO human-voice + E-E-A-T
+gate, publishing is opt-in, no invented facts, publisher fallback routing). Brand-specific
+rules still come from `config/brand.json`; the playbook governs what applies to every brand.

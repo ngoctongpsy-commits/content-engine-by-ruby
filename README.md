@@ -8,21 +8,19 @@ A brand-locked content automation plugin for Claude. Plan a 30-day calendar, dra
 
 ## What you get
 
-- **3 skills** that drive the full content workflow:
-  - `brand-locked-blog-writing` - drafts a full HTML blog whose layout (hero style, body style, heading numbering, references, figures) is chosen by a `format` preset, against your palette + voice rules. Dark hero + APA is just one preset (`editorial-dark`); a restaurant can use `magazine-light` and a simple blog `minimal-clean`.
-  - `content-planning` - generates or updates a 30-day calendar with 3 slots per day across your pillars
-  - `weekly-social-packet` - generates one LinkedIn + one Facebook + one clickbait SVG per week, with stat-trace validation
-- **4 slash commands** for one-tap workflows:
-  - `/setup-pipeline` - 5-minute onboarding from templates
-  - `/plan-month` - regenerate or extend the calendar
-  - `/write-blog A` (or B / C) - draft today's blog
-  - `/post-weekly` - generate this week's social packet
-- **2 generic scripts** that the pipeline calls:
-  - `scripts/publish-blog.py` - validate, render best figure as thumbnail, POST to CMS
-  - `scripts/post-weekly-social.py` - render clickbait SVG, fire Make.com webhooks, verify, alert
-- **2 working examples** showing how different the same engine looks per brand:
-  - `examples/luna-base/` - B2B tenant on the `editorial-dark` preset (Electric Mint `#00FFA3` + Deep Navy `#0A0E27` + Inter), real calendar + sample blog HTML + LinkedIn post.
-  - `examples/restaurant/` - a restaurant on the `magazine-light` preset, proving the engine is not locked to LunaBase's look.
+- **8 skills** covering a full marketing department (all brand-neutral, config-driven):
+  - `competitor-trend-research` - studies competitors + the live SERP + trends → a beat-the-SERP brief
+  - `content-planning` - a 30-day calendar with slots across your pillars
+  - `brand-locked-blog-writing` - a full HTML blog whose layout comes from a `format` preset (dark/editorial, magazine, minimal...)
+  - `seo-optimization` - keyword + intent research and a strict Google quality gate (E-E-A-T, Helpful Content, human voice, indexability)
+  - `weekly-social-packet` - one LinkedIn + one Facebook + one card image per week
+  - `video-production` - on-demand short-form video (script + clip via the video MCP + caption)
+  - `campaign-planning` - a full campaign brief + phased calendar handed to the content skills
+  - `paid-ads` - plan + draft Meta/Google ads as PAUSED drafts (never launches or spends)
+- **10 slash commands**: `/setup-pipeline`, `/research`, `/plan-month`, `/write-blog`, `/seo-audit`, `/post-weekly`, `/make-video`, `/video-today`, `/campaign-plan`, `/ads-plan`
+- **A knowledge + templates layer**: `knowledge/playbook.md` (engine-wide red-lines + routing) and `templates/` (output forms the skills fill)
+- **Generic publish scripts**: `scripts/publish-blog.py`, `scripts/post-weekly-social.py`
+- **Working examples**: `examples/luna-base/` (editorial-dark B2B) and `examples/restaurant/` (magazine-light) - same engine, different brand
 
 Everything is **brand-neutral by construction**. The skills and scripts contain no hardcoded brand AND no hardcoded layout. Every color, font, voice rule, forbidden phrase, validated stat, channel destination, AND the entire visual layout (`format`) + editorial model (`content_model`) read from `config/brand.json` + `config/channels.json`. Switching brands means swapping config, never editing a skill.
 
@@ -32,7 +30,12 @@ Everything is **brand-neutral by construction**. The skills and scripts contain 
 
 ### 1. Install the plugin
 
-Install from a Claude Plugin marketplace, or clone this repo into your project workspace.
+```
+/plugin marketplace add ngoctongpsy-commits/content-engine-by-ruby
+/plugin install content-engine-by-ruby@ruby-content-tools
+```
+
+Or install the packaged `.plugin` file (Customize → remove old → add new), or clone this repo into your workspace.
 
 ### 2. Run `/setup-pipeline`
 

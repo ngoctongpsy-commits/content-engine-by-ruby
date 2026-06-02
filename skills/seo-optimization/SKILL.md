@@ -71,3 +71,10 @@ If `seo.quality_gate` is `strict`, do NOT mark a draft ready to publish until ev
 - Generic AI prose with no first-hand experience (fails E-E-A-T + reads as AI).
 - Mass thin near-duplicate posts (scaled content abuse - penalized).
 - Fabricated stats or sources (breaks Trust; honor stat_rigor).
+
+## Engine-wide operating rules
+
+Before acting, follow the cross-cutting red-lines and routing in
+`knowledge/playbook.md` (ads = paused drafts only / never spend, SEO human-voice + E-E-A-T
+gate, publishing is opt-in, no invented facts, publisher fallback routing). Brand-specific
+rules still come from `config/brand.json`; the playbook governs what applies to every brand.

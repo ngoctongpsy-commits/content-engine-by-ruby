@@ -45,11 +45,13 @@ Three slots per day, using each slot's brand-defined intent from `content_model.
 ```markdown
 ## Week of YYYY-MM-DD
 
-| Date | Slot | Pillar | Topic | Target keyword | Notes |
-|---|---|---|---|---|---|
-| YYYY-MM-DD | A | <pillar> | <one-line topic fitting slot A intent> | <SEO keyword> |  |
-| YYYY-MM-DD | B | <pillar> | <one-line topic fitting slot B intent> | <SEO keyword> |  |
-| YYYY-MM-DD | C | <pillar> | <one-line topic fitting slot C intent> | <SEO keyword> |  |
+| Date | Slot | Format | Platform | Pillar | Topic | Target keyword | Notes |
+|---|---|---|---|---|---|---|---|
+| YYYY-MM-DD | A | blog |  | <pillar> | <topic fitting slot A intent> | <SEO keyword> |  |
+| YYYY-MM-DD | B | blog |  | <pillar> | <topic fitting slot B intent> | <SEO keyword> |  |
+| YYYY-MM-DD | C | video | reels | <pillar> | <short hook topic> | <SEO keyword> | 9:16 |
+
+`Format` = blog or video (empty = blog). For a `video` row set `Platform` (one of the brand's enabled `video.platforms`); aspect comes from config. Plan video rows when the topic suits a short clip and the brand uses video. A video row is produced by the `video-production` skill in calendar mode (review by default - it creates the clip and waits for approval, never auto-posts).
 ```
 
 ### Step 5 - Apply rotation rules

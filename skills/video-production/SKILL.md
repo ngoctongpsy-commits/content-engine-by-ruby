@@ -14,6 +14,14 @@ consumes the user's Higgsfield credits (free plan = 0 -> it will fail; tell the 
 - "Make a video / Reel / Short / TikTok about X", "turn this blog into a video", "video post for <platform>".
 - On request only. This skill is NOT part of the auto content calendar.
 
+## Step 0 - Mode: on-demand vs calendar-driven
+
+- ON-DEMAND (default, e.g. `/make-video <topic>`): the user names the topic + platform. Proceed to Step 1.
+- CALENDAR-DRIVEN (e.g. `/video-today`, or a scheduled task): read `config/content-calendar.md`, find the row for the target date whose `Format` is `video`. Use its Topic + Platform. Then run Steps 1-5, but honor `video.automation.mode`:
+  - `review` (default): create the script + clip + caption, save the packet to `video.automation.pending_dir` (default `outputs/video/pending`), notify the user it is ready, and STOP - do NOT post. The user reviews and posts.
+  - `auto-post`: only if explicitly set - hand the clip + caption to the social flow.
+  Because video generation needs the Higgsfield MCP (a Claude session), calendar-driven runs must be triggered by a Cowork SCHEDULED TASK, not the headless cron scripts. If no video row exists for the date, do nothing.
+
 ## Step 1 - Read config + scope
 
 Read `config/brand.json`: `video.*` (provider, default_model, style, platforms + aspect), `company`, `palette`, `voice`, `seo` (for intent/keywords if repurposing a blog).

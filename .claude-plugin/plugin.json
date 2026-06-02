@@ -1,7 +1,7 @@
 {
   "name": "content-engine-by-ruby",
-  "version": "0.6.0",
-  "description": "Brand-neutral AI content engine. Research competitors/trends, plan a calendar, draft long-form blogs, generate LinkedIn/Facebook posts + Canva clickbait images, make short-form videos via Higgsfield, optimize for Google SEO (E-E-A-T, Helpful Content, indexability) + broad audit, then publish. Everything reads from config/brand.json, so the same skills fit any company.",
+  "version": "0.7.0",
+  "description": "Brand-neutral AI content engine. Research competitors/trends, plan a calendar (blog + video), draft long-form blogs, generate LinkedIn/Facebook posts + Canva clickbait images, make short-form videos via Higgsfield (on-demand or calendar-driven with review), optimize for Google SEO + broad audit, then publish. Everything reads from config/brand.json.",
   "author": {
     "name": "Ruby"
   },

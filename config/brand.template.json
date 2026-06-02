@@ -299,6 +299,14 @@
         "aspect": "16:9",
         "max_seconds": 15
       }
+    },
+    "automation": {
+      "_comment": "Calendar-driven video. When the content calendar marks a day as a video post, the video-production skill (calendar mode) auto-WRITES the script + GENERATES the clip, but does NOT post. mode 'review' = save to outputs/video/pending and notify; the user approves + posts. Needs a Claude session (MCP), so trigger via a Cowork scheduled task, not the headless cron.",
+      "enabled": true,
+      "mode": "review",
+      "_mode_options": "review (create clip, wait for approval, then user posts) | auto-post (create + post automatically)",
+      "pending_dir": "outputs/video/pending",
+      "notify_on_ready": true
     }
   }
 }

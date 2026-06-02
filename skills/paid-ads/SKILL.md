@@ -25,7 +25,7 @@ Read `ads.*` (providers, currency, safety, meta/google account ids + defaults), 
 ## Step 2 - Plan the ad structure
 
 - **Objective -> structure.** Meta: campaign (objective from `ads.meta.default_objective` or the brief) -> ad set (audience, placements, budget) -> ad (creative). Google: campaign (`search` / `performance_max` / etc.) -> ad group (keywords/themes) -> ad (RSA / assets).
-- **Targeting/audience** from the brief (no assumed demographics). For Google search: build a keyword list (intent-first, from `seo` + `competitor-trend-research`), grouped into ad groups, with match types + negatives.
+- **Targeting** from the brief (no assumed demographics): audience (interests/segments), GEO (countries/regions/cities/radius), languages, device, and schedule/daypart. For Google search also build a keyword list (intent-first, from `seo` + `competitor-trend-research`), grouped into ad groups, with match types + negatives.
 - **Budget**: use the brief/`ads` defaults in `ads.default_currency`; propose daily/lifetime; never exceed what the user set.
 
 ## Step 3 - Write copy + creatives (on-brand, truthful)
@@ -36,7 +36,7 @@ Read `ads.*` (providers, currency, safety, meta/google account ids + defaults), 
 ## Step 4 - Create PAUSED drafts via ~~ads
 
 - **Meta** (connected): use the Meta Ads tools to create the campaign, ad set, creative, and ad - all PAUSED. List accounts first (ads_get_ad_accounts) if `ads.meta.ad_account_id` is empty. Show the created draft ids + a preview.
-- **Google**: if a Google Ads MCP with creation support is connected, create a PAUSED draft. If only the read/reporting MCP is connected (the official one), instead EXPORT a ready-to-paste plan: campaign type + budget + keywords (with match types + negatives) + RSA headlines/descriptions + final URLs, and tell the user to create it in the Google Ads UI.
+- **Google**: if a CREATION-CAPABLE Google Ads MCP is connected (official MCP with ADS_MCP_ENABLE_MUTATIONS=true, or MCPBundles / Synter), create the FULL campaign PAUSED - campaign + budget + ad group(s) + keywords (match types + negatives) + RSA ads + GEO targeting (regions/locations) + AUDIENCE targeting + device/daypart as specified. If only the read-only official MCP is connected, instead EXPORT a ready-to-paste plan (same fields incl. geo/audience) for the Google Ads UI.
 - If no `~~ads` MCP is connected for a platform, deliver the full plan + copy + creatives and tell the user to connect the MCP or paste into the platform.
 
 ## Step 5 - Hand off

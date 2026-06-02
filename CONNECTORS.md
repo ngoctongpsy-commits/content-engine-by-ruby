@@ -35,5 +35,5 @@ The `paid-ads` skill creates PAUSED ad drafts via a connected ads MCP. It never 
 | Platform | MCP | Note |
 |---|---|---|
 | **Meta (Facebook + Instagram)** | official Meta Ads MCP (connect in Claude) | Full PAUSED-draft creation (campaign/ad set/ad/creative). |
-| **Google Ads** (Search/Display/YouTube/Shopping/Maps-Local) | official Google Ads MCP (self-host) or a richer/unified MCP | Official MCP is read/reporting; for full creation use the Google Ads UI or a richer MCP. The skill exports a ready-to-paste plan otherwise. |
+| **Google Ads** (Search/Display/YouTube/Shopping/Maps-Local) | official Google Ads MCP with `ADS_MCP_ENABLE_MUTATIONS=true` (self-host, free), or a hosted MCP (MCPBundles / Synter) | Full PAUSED campaign creation incl. geo + audience + device targeting. The official MCP is read-only UNTIL you enable mutations. If only read-only is connected, the skill exports a paste-ready plan. |
 | Others (TikTok/LinkedIn/Amazon/...) | per-platform or a unified MCP (Markifact/Synter) | Tool-agnostic - any connected ads MCP works. |

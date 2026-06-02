@@ -485,7 +485,7 @@
       "default_daily_budget_cents": 0
     },
     "google": {
-      "_comment": "Connect a Google Ads MCP. Covers Search/Display/YouTube/Shopping/Maps-Local. Official MCP is read/reporting; full campaign creation may need the Google Ads UI or a richer MCP.",
+      "_comment": "Connect a CREATION-CAPABLE Google Ads MCP to create full campaigns (geo + audience + device targeting), PAUSED. Options: the official Google Ads MCP run with ADS_MCP_ENABLE_MUTATIONS=true (self-host, free), or a hosted MCP like MCPBundles / Synter. Covers Search/Display/YouTube/Shopping/Maps-Local. If only a read-only Google MCP is connected, the skill exports a ready-to-paste plan instead.",
       "customer_id": "",
       "default_campaign_type": "search",
       "_campaign_type_options": "search | performance_max | display | video | shopping | local"

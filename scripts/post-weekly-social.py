@@ -433,10 +433,67 @@ def main():
             cache["svg_render"] = cms["image_url_pattern"].format(base_url=cms["base_url"].rstrip("/"), uuid=uuid)
         return cache["svg_render"]
 
-    webhook_url = read_secret(plugin_root, args.profile, channels["social"]["make_webhook_url_file"])
     fire_time_utc = datetime.utcnow()
     all_ok = True
     upload_cache = {}
+    fallback_notes = []
+
+    def resolve_post_text(channel_field):
+        """Per-platform post text from the packet; fall back to facebook/linkedin."""
+        key_map = {"linkedin": "linkedin_post", "facebook": "facebook_post", "instagram": "instagram_post",
+                   "threads": "threads_post", "x": "x_post", "tiktok": "tiktok_post",
+                   "youtube": "youtube_post", "pinterest": "pinterest_post"}
+        for k, v in key_map.items():
+            if k in channel_field and packet.get(v):
+                return packet[v]
+        return packet.get("facebook_post") or packet.get("linkedin_post", "")
+
+    def publish_via(pubname, channel_field, payload):
+        """Send via one publisher. Returns (status, body). Raises on misconfig."""
+        pubs = channels["social"].get("publishers", {})
+        pub = pubs.get(pubname)
+        if pub is None:
+            if pubname == "make":
+                url = read_secret(plugin_root, args.profile, channels["social"]["make_webhook_url_file"])
+                return post_to_webhook(url, payload)
+            raise RuntimeError(f"unknown publisher '{pubname}'")
+        ptype = pub.get("type")
+        if ptype == "webhook":
+            url = read_secret(plugin_root, args.profile, pub.get("webhook_url_file") or channels["social"]["make_webhook_url_file"])
+            return post_to_webhook(url, payload)
+        if ptype == "rest":
+            if not pub.get("enabled"):
+                raise RuntimeError(f"publisher '{pubname}' not enabled (set enabled + api key to use it)")
+            import requests
+            key = read_secret(plugin_root, args.profile, pub.get("api_key_file"))
+            api_base = pub.get("api_base", "").rstrip("/")
+            # Generic REST publish - adjust path/fields to the provider's API (e.g. upload-post).
+            r = requests.post(f"{api_base}/post",
+                              headers={"Authorization": f"Apikey {key}", "Content-Type": "application/json"},
+                              json={"platform": channel_field, "text": payload.get("post_text", ""),
+                                    "media_url": payload.get("image_url", ""), "link": payload.get("blog_url", "")},
+                              timeout=60)
+            return r.status_code, r.text[:300]
+        raise RuntimeError(f"publisher '{pubname}' has unsupported type '{ptype}'")
+
+    def publish_channel(ch_cfg, channel_field, payload):
+        """Try publisher, then fallback_publisher on error. Returns (used, status, body)."""
+        primary = ch_cfg.get("publisher", "make")
+        fb = (ch_cfg.get("fallback_publisher") or "").strip()
+        order = [primary] + ([fb] if fb and fb != primary else [])
+        last = (0, "no publisher")
+        for i, pubname in enumerate(order):
+            try:
+                status, body = publish_via(pubname, channel_field, payload)
+            except Exception as e:
+                status, body = 0, str(e)
+            if 200 <= status < 300:
+                if i > 0:
+                    fallback_notes.append(f"{channel_field}: '{primary}' failed, posted via fallback '{pubname}'")
+                return pubname, status, body
+            last = (status, body)
+        return order[-1], last[0], last[1]
+
     for ch_name, ch_cfg in channels["social"]["channels"].items():
         if not ch_cfg.get("enabled"):
             continue
@@ -445,7 +502,7 @@ def main():
         payload = {
             "blog_title": packet.get("blog_title") or packet.get("feature_specific", ""),
             "blog_url": packet.get("blog_url") or brand["company"]["url"],
-            "post_text": packet["linkedin_post" if "linkedin" in channel_field else "facebook_post"],
+            "post_text": resolve_post_text(channel_field),
             "post_visibility": ch_cfg.get("post_visibility", "PUBLIC"),
             "image_url": image_url,
             "image_title": packet.get("image_title", ""),
@@ -454,10 +511,13 @@ def main():
             "post_type": post_type,
             "schedule_iso": "",
         }
-        status, body = post_to_webhook(webhook_url, payload)
-        print(f"  {ch_name}: image {image_url} -> HTTP {status}")
+        used, status, body = publish_channel(ch_cfg, channel_field, payload)
+        print(f"  {ch_name}: via {used} -> HTTP {status}")
         if not (200 <= status < 300):
             all_ok = False
+    if fallback_notes:
+        print("  [fallback used] " + "; ".join(fallback_notes))
+        notify_telegram(channels, plugin_root, args.profile, "Social fallback used:\n" + "\n".join(fallback_notes))
 
     # Verify Make.com executions
     if all_ok:

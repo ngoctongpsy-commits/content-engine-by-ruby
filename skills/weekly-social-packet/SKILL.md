@@ -42,13 +42,19 @@ Pick the highest-scoring post from the last 7 days (`outputs/blogs/`). Read it. 
 
 Read the current month's row in the content-calendar feature rotation table. Extract `angle` + `specific` (these are the brand's OWN angles from `content_model.feature_rotation_angles.list`). Build the message around that angle and link to the relevant page. Do not assume B2B angles - use whatever the brand defined (e.g. new_menu, chef_story for a restaurant; product_spotlight, customer_proof for SaaS).
 
-### Step 4 - Generate posts
+### Step 4 - Generate posts (per ENABLED platform, native format)
 
-**LinkedIn** - voice from `voice.accounts.<voice.default_account>` (or `company`). 900-1400 chars. 3-5 hashtags at end. blog_driver: link in first comment. feature_promo: link in body.
+Write a separate post for EACH enabled channel in `channels.json` `social.channels`, in the brand voice (`voice.accounts.<voice.default_account>`). Each platform has its own native format:
 
-**Facebook** - same active voice, lighter register. 300-600 chars. No hashtags. URL in body.
+- **LinkedIn** - professional. 900-1400 chars. 3-5 hashtags at end. blog_driver: link in first comment; feature_promo: link in body.
+- **Facebook** - friendly, lighter. 300-600 chars. No hashtags. URL in body.
+- **Instagram** - visual-first caption, punchy first line, 1-2 short paras, 5-10 hashtags, "link in bio" (IG kills in-caption links). Needs an image/video.
+- **Threads** - conversational, short (<=500 chars), 1-2 lines, minimal/no hashtags, can be a hot take or question.
+- **X / Twitter** - tight (<=280 chars), one sharp hook, 1-2 hashtags max, link allowed.
+- **TikTok / YouTube (Shorts)** - these are VIDEO posts: a short caption/title + 3-5 tags; the clip comes from the `video-production` skill. YouTube also gets a title (<=60 chars) + description.
+- **Pinterest** - a keyword-rich title + 1-2 sentence description; pin = image + link.
 
-Adapt audience and register to the brand's tone string - do not assume "CTOs / VP Engineering" unless that is the brand's audience.
+Adapt audience/register to the brand's tone - do not assume any specific audience. Keep numbers truthful (honor `content_model.stat_rigor`). Only write posts for channels that are `enabled`.
 
 ### Step 5 - Generate the social image (provider-aware)
 

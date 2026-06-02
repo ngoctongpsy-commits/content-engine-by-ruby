@@ -1,6 +1,5 @@
 {
   "_comment": "Posting channel config. CMS for blog publishing + social channels via Make.com webhook.",
-
   "cms": {
     "_comment": "Blog publishing target. provider \"none\" = no CMS: publish-blog.py writes final HTML to outputs/blogs/ready/ for manual or GitHub publishing. Other providers (directus, strapi, contentful, webflow) POST to the CMS.",
     "provider": "directus",
@@ -21,37 +20,96 @@
     "public_url_pattern": "https://YOUR-DOMAIN.com/blog/{slug}",
     "image_url_pattern": "{base_url}/assets/{uuid}.png"
   },
-
   "social": {
-    "_comment": "Make.com webhook routes social posts to multiple channels. Each channel filtered by `channel` field.",
+    "_comment": "Each channel posts via its `publisher` (default 'make' = the Make.com webhook). Optional `fallback_publisher` is tried automatically if the primary errors (script logs + notifies). Add cheaper publishers in `publishers` as needed.",
     "make_webhook_url_file": ".make-webhook-url",
     "make_api_token_file": ".make-api-token",
     "make_scenario_id": "REPLACE_WITH_SCENARIO_ID",
     "make_base_url": "https://eu1.make.com",
+    "publishers": {
+      "_comment": "Registry of where channels can post. 'make' = Make.com webhook (Make routes by the channel field). Add a cheap fallback for the hard platforms when needed.",
+      "make": {
+        "type": "webhook",
+        "webhook_url_file": ".make-webhook-url",
+        "api_token_file": ".make-api-token",
+        "scenario_id": "REPLACE_WITH_SCENARIO_ID",
+        "base_url": "https://eu1.make.com"
+      },
+      "upload-post": {
+        "_comment": "CHEAPEST fallback. upload-post.com free tier = 10 posts/month and covers the hard platforms TikTok/Threads/X plus IG/YouTube/FB/LinkedIn (it handles the platform app-approval for you). Sign up, put the API key in config/.upload-post-key, set enabled=true. Leave disabled until you actually need a hard platform.",
+        "type": "rest",
+        "enabled": false,
+        "api_base": "https://api.upload-post.com/api",
+        "api_key_file": ".upload-post-key"
+      }
+    },
     "channels": {
       "linkedin_company": {
         "enabled": true,
         "channel_field_value": "linkedin",
+        "publisher": "make",
+        "fallback_publisher": "",
         "post_visibility": "PUBLIC",
         "feed_url": "https://www.linkedin.com/company/YOUR-COMPANY-SLUG/"
       },
       "facebook_page": {
         "enabled": true,
         "channel_field_value": "facebook",
+        "publisher": "make",
+        "fallback_publisher": "",
         "feed_url": "https://www.facebook.com/YOUR-FB-PAGE-SLUG"
+      },
+      "instagram": {
+        "enabled": false,
+        "channel_field_value": "instagram",
+        "publisher": "make",
+        "fallback_publisher": "upload-post",
+        "_note": "Needs an IG Business/Creator account linked to a Facebook Page."
+      },
+      "youtube": {
+        "enabled": false,
+        "channel_field_value": "youtube",
+        "publisher": "make",
+        "fallback_publisher": "upload-post",
+        "_note": "Video upload (Shorts/long). Needs a video asset from video-production."
+      },
+      "threads": {
+        "enabled": false,
+        "channel_field_value": "threads",
+        "publisher": "make",
+        "fallback_publisher": "upload-post",
+        "_note": "Conversational text post."
+      },
+      "tiktok": {
+        "enabled": false,
+        "channel_field_value": "tiktok",
+        "publisher": "make",
+        "fallback_publisher": "upload-post",
+        "_note": "TikTok content API is restrictive; upload-post handles approval. Video required."
+      },
+      "x_twitter": {
+        "enabled": false,
+        "channel_field_value": "x",
+        "publisher": "make",
+        "fallback_publisher": "upload-post",
+        "_note": "X API can be costly direct; upload-post covers it."
+      },
+      "pinterest": {
+        "enabled": false,
+        "channel_field_value": "pinterest",
+        "publisher": "make",
+        "fallback_publisher": "upload-post",
+        "_note": "Pin = image + link."
       },
       "linkedin_personal": {
         "enabled": false,
         "channel_field_value": "linkedin-personal",
-        "_comment": "Founder personal LinkedIn — usually manual post, not automated"
-      },
-      "x_twitter": {
-        "enabled": false,
-        "channel_field_value": "x"
+        "publisher": "make",
+        "fallback_publisher": "",
+        "_comment": "Founder personal LinkedIn - often manual."
       }
     }
   },
-
   "schedule": {
     "_comment": "Cron-style schedules in LOCAL timezone. Adjust to your audience's peak engagement hour.",
     "blog_draft_generation": {
@@ -79,7 +137,6 @@
       "_comment": "Tue 11:30 — fire social posts at audience peak engagement hour"
     }
   },
-
   "notifications": {
     "telegram": {
       "config_file": ".notify-config",

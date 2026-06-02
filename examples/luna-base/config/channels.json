@@ -5,7 +5,6 @@
     "schema_version": "1.0",
     "_secrets_note": "Tokens live in gitignored sibling files: .cms-token, .make-webhook-url, .make-api-config, .notify-config"
   },
-
   "cms": {
     "provider": "directus",
     "base_url": "https://api.lunabase.ai",
@@ -26,44 +25,96 @@
     "public_url_pattern": "https://lunabase.ai/blog/{slug}",
     "image_url_pattern": "https://api.lunabase.ai/assets/{uuid}.png"
   },
-
   "social": {
+    "_comment": "Each channel posts via its `publisher` (default 'make' = the Make.com webhook). Optional `fallback_publisher` is tried automatically if the primary errors (script logs + notifies). Add cheaper publishers in `publishers` as needed.",
     "make_webhook_url_file": ".make-webhook-url",
-    "make_api_token_file": ".make-api-config",
-    "make_scenario_id": null,
-    "make_base_url": "https://us2.make.com/api/v2",
-    "make_verify_wait_seconds": 90,
-
+    "make_api_token_file": ".make-api-token",
+    "make_scenario_id": "REPLACE_WITH_SCENARIO_ID",
+    "make_base_url": "https://eu1.make.com",
+    "publishers": {
+      "_comment": "Registry of where channels can post. 'make' = Make.com webhook (Make routes by the channel field). Add a cheap fallback for the hard platforms when needed.",
+      "make": {
+        "type": "webhook",
+        "webhook_url_file": ".make-webhook-url",
+        "api_token_file": ".make-api-token",
+        "scenario_id": "REPLACE_WITH_SCENARIO_ID",
+        "base_url": "https://eu1.make.com"
+      },
+      "upload-post": {
+        "_comment": "CHEAPEST fallback. upload-post.com free tier = 10 posts/month and covers the hard platforms TikTok/Threads/X plus IG/YouTube/FB/LinkedIn (it handles the platform app-approval for you). Sign up, put the API key in config/.upload-post-key, set enabled=true. Leave disabled until you actually need a hard platform.",
+        "type": "rest",
+        "enabled": false,
+        "api_base": "https://api.upload-post.com/api",
+        "api_key_file": ".upload-post-key"
+      }
+    },
     "channels": {
       "linkedin_company": {
         "enabled": true,
-        "_description": "Luna Studio LinkedIn company page",
-        "voice_account": "company",
-        "webhook_payload_extra": {
-          "channel": "linkedin_company"
-        }
+        "channel_field_value": "linkedin",
+        "publisher": "make",
+        "fallback_publisher": "",
+        "post_visibility": "PUBLIC",
+        "feed_url": "https://www.linkedin.com/company/YOUR-COMPANY-SLUG/"
       },
       "facebook_page": {
         "enabled": true,
-        "_description": "Luna Base Facebook page",
-        "voice_account": "company",
-        "webhook_payload_extra": {
-          "channel": "facebook_page"
-        }
+        "channel_field_value": "facebook",
+        "publisher": "make",
+        "fallback_publisher": "",
+        "feed_url": "https://www.facebook.com/YOUR-FB-PAGE-SLUG"
       },
-      "linkedin_personal": {
+      "instagram": {
         "enabled": false,
-        "_description": "Andy Pham personal LinkedIn (separate workflow, not built into weekly packet)",
-        "voice_account": "personal"
+        "channel_field_value": "instagram",
+        "publisher": "make",
+        "fallback_publisher": "upload-post",
+        "_note": "Needs an IG Business/Creator account linked to a Facebook Page."
+      },
+      "youtube": {
+        "enabled": false,
+        "channel_field_value": "youtube",
+        "publisher": "make",
+        "fallback_publisher": "upload-post",
+        "_note": "Video upload (Shorts/long). Needs a video asset from video-production."
+      },
+      "threads": {
+        "enabled": false,
+        "channel_field_value": "threads",
+        "publisher": "make",
+        "fallback_publisher": "upload-post",
+        "_note": "Conversational text post."
+      },
+      "tiktok": {
+        "enabled": false,
+        "channel_field_value": "tiktok",
+        "publisher": "make",
+        "fallback_publisher": "upload-post",
+        "_note": "TikTok content API is restrictive; upload-post handles approval. Video required."
       },
       "x_twitter": {
         "enabled": false,
-        "_description": "X/Twitter (not currently active)",
-        "voice_account": "company"
+        "channel_field_value": "x",
+        "publisher": "make",
+        "fallback_publisher": "upload-post",
+        "_note": "X API can be costly direct; upload-post covers it."
+      },
+      "pinterest": {
+        "enabled": false,
+        "channel_field_value": "pinterest",
+        "publisher": "make",
+        "fallback_publisher": "upload-post",
+        "_note": "Pin = image + link."
+      },
+      "linkedin_personal": {
+        "enabled": false,
+        "channel_field_value": "linkedin-personal",
+        "publisher": "make",
+        "fallback_publisher": "",
+        "_comment": "Founder personal LinkedIn - often manual."
       }
     }
   },
-
   "schedule": {
     "_timezone_publish": "Asia/Kolkata",
     "_timezone_generation": "Asia/Ho_Chi_Minh",
@@ -98,7 +149,6 @@
       "_description": "Windows host fires Make webhooks (LinkedIn India peak)"
     }
   },
-
   "notifications": {
     "telegram": {
       "enabled": true,

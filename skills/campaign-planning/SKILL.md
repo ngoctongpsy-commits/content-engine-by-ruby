@@ -51,7 +51,7 @@ Write the brief to `outputs/campaigns/<campaign-slug>.md` and the campaign calen
 - Generate the calendar into the working calendar (`/plan-month`), or
 - Start drafting the first asset (`/write-blog`, `/make-video`), or
 - Pull a competitor brief (`/research`) to sharpen the message, or
-- Set up Meta/Facebook ads for the paid portion (when the ads connector is used).
+- Plan + draft the paid portion as PAUSED ads via the `paid-ads` skill (Meta/Facebook now, Google when connected) - drafts only, you launch.
 
 ## Anti-patterns
 

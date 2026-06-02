@@ -26,3 +26,14 @@ Each social channel posts via its `publisher` (default `make`). Set `fallback_pu
 | **upload-post** (upload-post.com) | **FREE 10 posts/mo**, ~$16/mo unlimited | TikTok, Threads, X (the hard ones) + IG/YouTube/FB/LinkedIn | Cheapest fallback for hard platforms. Sign up, put API key in `config/.upload-post-key`, set `enabled: true`. |
 
 Recommended: keep **Make** for the easy platforms; only enable **Upload-Post** as a fallback for TikTok/Threads/X when you need them. The native platform APIs (TikTok/Threads/IG) are free - upload-post just handles their app-approval for you.
+
+
+## Paid ads (~~ads)
+
+The `paid-ads` skill creates PAUSED ad drafts via a connected ads MCP. It never launches or spends - you review and launch in Ads Manager.
+
+| Platform | MCP | Note |
+|---|---|---|
+| **Meta (Facebook + Instagram)** | official Meta Ads MCP (connect in Claude) | Full PAUSED-draft creation (campaign/ad set/ad/creative). |
+| **Google Ads** (Search/Display/YouTube/Shopping/Maps-Local) | official Google Ads MCP (self-host) or a richer/unified MCP | Official MCP is read/reporting; for full creation use the Google Ads UI or a richer MCP. The skill exports a ready-to-paste plan otherwise. |
+| Others (TikTok/LinkedIn/Amazon/...) | per-platform or a unified MCP (Markifact/Synter) | Tool-agnostic - any connected ads MCP works. |

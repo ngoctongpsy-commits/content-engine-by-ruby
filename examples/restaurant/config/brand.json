@@ -316,5 +316,32 @@
       "pending_dir": "outputs/video/pending",
       "notify_on_ready": true
     }
+  },
+  "ads": {
+    "_comment": "Paid ads. Tool-agnostic ~~ads. Meta Ads MCP = full PAUSED-draft creation. Google Ads MCP (official) is mostly read/reporting - for full creation use the Google Ads UI or a richer MCP; the engine plans + writes keywords/ad copy and exports them. SAFETY: the engine only creates PAUSED drafts; launching + budget spend is always your manual action.",
+    "providers": [
+      "meta",
+      "google"
+    ],
+    "default_currency": "USD",
+    "safety": {
+      "create_paused": true,
+      "never_launch_or_spend": true,
+      "_comment": "Engine creates campaigns PAUSED/draft only. Never unpause, launch, raise budget, or enter payment - that is the user's manual step."
+    },
+    "meta": {
+      "_comment": "Uses the connected Meta Ads MCP. Set your ad account id, or the skill lists accounts via ads_get_ad_accounts.",
+      "ad_account_id": "",
+      "page_id": "",
+      "default_objective": "OUTCOME_TRAFFIC",
+      "_objective_options": "OUTCOME_AWARENESS | OUTCOME_TRAFFIC | OUTCOME_ENGAGEMENT | OUTCOME_LEADS | OUTCOME_SALES | OUTCOME_APP_PROMOTION",
+      "default_daily_budget_cents": 0
+    },
+    "google": {
+      "_comment": "Connect a Google Ads MCP. Covers Search/Display/YouTube/Shopping/Maps-Local. Official MCP is read/reporting; full campaign creation may need the Google Ads UI or a richer MCP.",
+      "customer_id": "",
+      "default_campaign_type": "search",
+      "_campaign_type_options": "search | performance_max | display | video | shopping | local"
+    }
   }
 }

@@ -30,6 +30,10 @@ Read the active `config/channels.json` (or template) for `schedule.blog_publish_
 
 If `content_model.pillars.list` is non-empty, use those pillars. If empty, ask the user for 3-5 core content domains for their brand, then offer to save them into `content_model.pillars.list`.
 
+### Step 2.4 - Campaign calendar (if a campaign brief exists)
+
+If the user is running a CAMPAIGN, the `campaign-planning` skill produces a phased, campaign-mapped calendar. Merge that into the 30-day calendar (respecting its phases, channels, Format/Platform) instead of generating generic topics. A campaign overrides the default cadence for its window.
+
 ### Step 2.5 - Pull competitor + trend signals (optional but recommended)
 
 If the user wants topics informed by what is ranking/trending or by competitors, run (or reuse output from) the `competitor-trend-research` skill first. Use its beat-the-SERP briefs to choose topics with proven demand and a clear angle to win - not generic guesses. Keep every topic tied to a brand pillar.

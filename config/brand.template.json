@@ -236,7 +236,53 @@
       "list": []
     },
     "stat_rigor": "cited",
-    "_stat_rigor_options": "strict (every number must be in validated_stats.entries; for data-heavy B2B) | cited (numbers allowed if cited inline with a real source) | off (no numeric-claim enforcement; for lifestyle/brand content)"
+    "_stat_rigor_options": "strict (every number must be in validated_stats.entries; for data-heavy B2B) | cited (numbers allowed if cited inline with a real source) | off (no numeric-claim enforcement; for lifestyle/brand content)",
+    "campaign_defaults": {
+      "_comment": "Defaults for the campaign-planning skill (objectives, KPI templates per objective, budget currency, phases).",
+      "objectives": [
+        "awareness",
+        "consideration",
+        "conversion",
+        "retention",
+        "advocacy"
+      ],
+      "default_objective": "awareness",
+      "kpi_templates": {
+        "awareness": [
+          "reach",
+          "impressions",
+          "share of voice"
+        ],
+        "consideration": [
+          "engagement rate",
+          "email signups",
+          "content views"
+        ],
+        "conversion": [
+          "leads",
+          "signups",
+          "purchases",
+          "CPA"
+        ],
+        "retention": [
+          "repeat rate",
+          "churn reduction",
+          "NPS"
+        ],
+        "advocacy": [
+          "referrals",
+          "reviews",
+          "user-generated posts"
+        ]
+      },
+      "currency": "USD",
+      "default_phases": [
+        "pre-launch",
+        "launch",
+        "sustain",
+        "wind-down"
+      ]
+    }
   },
   "seo": {
     "_comment": "SEO + Google quality settings used by the seo-optimization skill and the blog skill to make posts INDEXABLE, E-E-A-T compliant, and intent-matched. See skills/seo-optimization/references/google-seo-standards.md.",

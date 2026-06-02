@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Ruby's content automation marketplace. Brand-neutral content engine usable across any company.",
-    "version": "0.8.0"
+    "version": "0.9.0"
   },
   "plugins": [
     {
       "name": "content-engine-by-ruby",
       "source": "./",
-      "description": "Brand-neutral AI content engine: competitor/trend research, calendar, blogs, Canva images, Higgsfield video, per-platform social posts (LinkedIn/FB/IG/Threads/X/TikTok/YouTube/Pinterest) published via Make.com with automatic cheap fallback (Upload-Post), Google SEO gate. Config-driven; CMS or GitHub.",
-      "version": "0.8.0",
+      "description": "Brand-neutral AI marketing engine: campaign planning, competitor/trend research, content calendar, blogs, Canva images, Higgsfield video, per-platform social posts via Make.com (+ cheap fallback), Google SEO gate. Config-driven; CMS or GitHub.",
+      "version": "0.9.0",
       "author": {
         "name": "Ruby"
       },
@@ -25,7 +25,8 @@
         "multi-brand",
         "seo",
         "competitor-research",
-        "video"
+        "video",
+        "campaign-planning"
       ]
     }
   ]

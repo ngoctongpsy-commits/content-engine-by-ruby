@@ -196,7 +196,53 @@
         "customer_review"
       ]
     },
-    "stat_rigor": "off"
+    "stat_rigor": "off",
+    "campaign_defaults": {
+      "_comment": "Defaults for the campaign-planning skill (objectives, KPI templates per objective, budget currency, phases).",
+      "objectives": [
+        "awareness",
+        "consideration",
+        "conversion",
+        "retention",
+        "advocacy"
+      ],
+      "default_objective": "awareness",
+      "kpi_templates": {
+        "awareness": [
+          "reach",
+          "impressions",
+          "share of voice"
+        ],
+        "consideration": [
+          "engagement rate",
+          "email signups",
+          "content views"
+        ],
+        "conversion": [
+          "leads",
+          "signups",
+          "purchases",
+          "CPA"
+        ],
+        "retention": [
+          "repeat rate",
+          "churn reduction",
+          "NPS"
+        ],
+        "advocacy": [
+          "referrals",
+          "reviews",
+          "user-generated posts"
+        ]
+      },
+      "currency": "USD",
+      "default_phases": [
+        "pre-launch",
+        "launch",
+        "sustain",
+        "wind-down"
+      ]
+    }
   },
   "seo": {
     "_comment": "SEO + Google quality settings used by the seo-optimization skill and the blog skill to make posts INDEXABLE, E-E-A-T compliant, and intent-matched. See skills/seo-optimization/references/google-seo-standards.md.",

@@ -8,7 +8,7 @@ description: Research competitors and what is currently ranking / trending for a
 Goal: before planning or writing, learn what is already winning (competitors + the live SERP +
 trending angles), then produce a brief to write something that MATCHES the intent and BEATS it
 with original value. Never duplicate - Google rewards added experience/data, not copies
-(see `../seo-optimization/references/google-seo-standards.md`, sections C and D).
+(see `../../knowledge/google-seo-standards.md`, sections C and D).
 
 ## When to use
 

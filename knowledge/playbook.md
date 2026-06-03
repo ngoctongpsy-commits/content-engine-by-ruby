@@ -1,5 +1,7 @@
 # Content Engine — Operating Playbook
 
+> Before any version bump, run the regression net in `knowledge/EVAL-SUITE.md`.
+
 This is the engine's **cross-cutting playbook**: the rules that hold true for *every*
 brand the engine runs. Brand-specific knowledge (voice, colors, pillars, thresholds,
 accounts) lives per-tenant in **`config/brand.json`** and **`config/channels.json`** —

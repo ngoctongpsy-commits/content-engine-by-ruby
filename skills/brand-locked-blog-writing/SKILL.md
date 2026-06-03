@@ -119,7 +119,7 @@ orb-wordmark snippet (replace `{...}` with config values inline):
 
 ### Step 7.6 - SEO + Google quality gate (must get indexed AND rank)
 
-Read `references/google-seo-standards.md` and run the gate (this is what stops the post from being unindexed or treated as thin AI content). Confirm:
+Read `../../knowledge/google-seo-standards.md` and run the gate (this is what stops the post from being unindexed or treated as thin AI content). Confirm:
 - INDEXABLE: one H1, keyworded readable slug, title 50-60 chars, meta description 150-160 chars, canonical, OG/Twitter, JSON-LD Article with real author+publisher, image alt text, internal links to related posts.
 - E-E-A-T: real author byline + credentials from `seo.eeat`; first-hand specifics + concrete examples; cited credible sources for claims; factual (honor `content_model.stat_rigor`).
 - HELPFUL + people-first: fully answers the search intent; original value beyond restating page 1; a direct answer in the first 1-2 paragraphs.
@@ -164,7 +164,7 @@ Write final HTML to `outputs/blogs/draft-YYYY-MM-DD-slot-{X}-{slug}.html`. If yo
 - `references/svg-patterns.md` - 12 figure patterns + layout invariants (only when figures enabled)
 - `references/brand-voice-rules.md` - voice enforcement detail
 - `references/canva-images.md` - clickbait thumbnail via Canva (only when `format.images.provider` is `canva`)
-- `references/google-seo-standards.md` - Google indexability + E-E-A-T + Helpful Content + human-voice gate (READ in Step 7.6)
+- `../../knowledge/google-seo-standards.md` - Google indexability + E-E-A-T + Helpful Content + human-voice gate (READ in Step 7.6)
 
 ## Anti-patterns
 

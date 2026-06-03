@@ -1,6 +1,6 @@
 {
   "name": "content-engine-by-ruby",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "description": "Brand-neutral AI marketing engine. Plan campaigns + paid ads (Meta/Facebook + Google, paused drafts), research competitors/trends, plan a calendar, draft blogs, generate Canva images + Higgsfield videos, write per-platform social posts and publish via Make.com, and optimize for Google SEO. Everything reads from config/brand.json.",
   "author": {
     "name": "Ruby"

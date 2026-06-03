@@ -7,7 +7,7 @@ description: Make content rank on Google - keyword + search-intent research, on-
 
 Goal: every post is technically INDEXABLE, passes Google's quality bar (E-E-A-T + Helpful
 Content) with real HUMAN VOICE, and targets keywords by INTENT. Read
-`references/google-seo-standards.md` first - it is the rulebook this skill enforces.
+`../../knowledge/google-seo-standards.md` first - it is the rulebook this skill enforces.
 
 ## When to use
 
@@ -31,7 +31,7 @@ Read `config/content-calendar.md` for the target keyword/topic if relevant.
 
 ## Step 3 - Optimize / write to the Google quality gate
 
-Apply `references/google-seo-standards.md` sections A-F. The content must:
+Apply `../../knowledge/google-seo-standards.md` sections A-F. The content must:
 - Indexable on-page: one H1, slugged URL with the keyword, title 50-60 chars, meta description 150-160 chars, canonical, OG/Twitter, JSON-LD Article (real author + publisher), alt text, internal links.
 - E-E-A-T: real author byline + credentials from `seo.eeat`; first-hand experience + concrete specifics; cite credible sources for claims; factual, no fabricated stats.
 - Helpful + people-first: fully answers the intent, adds original value beyond restating page 1.

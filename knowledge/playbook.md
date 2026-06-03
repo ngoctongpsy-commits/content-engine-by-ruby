@@ -63,7 +63,10 @@ Before a blog is considered done, run it through `seo-optimization`:
   option only if needed. Connector choices and their costs are documented in `CONNECTORS.md`.
 - Video (Higgsfield) and ads spend are user-funded and user-triggered.
 
-## 6. Multi-business model
+## 6. Observability — leave a decision_trace
+Every skill ends its output with a short **decision_trace**: which playbook section / config block it applied, which template it used, which routing/approver path it took, and (for reports) which data sources were used vs "no data". This makes any recommendation auditable and feeds the analytics layer. Keep it to a few lines.
+
+## 7. Multi-business model
 
 - One engine, many brands. Each business = its own **config profile** pointing to its own
   accounts/router. Switching brand = switching `config/brand.json` + `config/channels.json`,

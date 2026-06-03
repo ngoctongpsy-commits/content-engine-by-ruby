@@ -145,5 +145,13 @@
       "alert_on_social_post_success": true,
       "alert_on_social_post_failure": true
     }
+  },
+  "email": {
+    "_comment": "Email destination for email-marketing. Drafts staged here; the user sends. publisher/fallback like the social channels.",
+    "enabled": false,
+    "provider": "brevo",
+    "fallback_provider": "export_only",
+    "list_or_segment": "",
+    "_note": "Authenticate the provider with your own account; the engine never logs in or imports lists."
   }
 }

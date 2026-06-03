@@ -381,5 +381,51 @@
       "default_campaign_type": "search",
       "_campaign_type_options": "search | performance_max | display | video | shopping | local"
     }
+  },
+  "analytics": {
+    "_comment": "Measure -> optimize loop (analytics-reporting skill). Tool-agnostic ~~analytics. Cost-first: the engine's own publish logs ($0) + free tools (Google Analytics 4, Search Console) + platform-native insights + the connected Meta/Google Ads MCPs. NEVER fabricates a metric; missing sources are marked 'no data'.",
+    "providers": [
+      "publish_logs",
+      "google_analytics",
+      "search_console",
+      "platform_insights",
+      "meta_ads",
+      "google_ads"
+    ],
+    "_provider_options": "publish_logs (always, $0) | google_analytics | search_console | platform_insights | meta_ads | google_ads | other connected ~~analytics MCP",
+    "report_cadence": "weekly",
+    "_cadence_options": "weekly | biweekly | monthly",
+    "kpi": {
+      "_comment": "Targets the report scores against (GREEN/YELLOW/RED). Fill per brand; leave 0 to skip.",
+      "leads_target": 0,
+      "blog_clicks_target": 0,
+      "social_engagement_rate_target": 0,
+      "email_open_rate_target": 0,
+      "ads_cpa_target": 0
+    }
+  },
+  "email": {
+    "_comment": "Nurture loop (email-marketing skill). Tool-agnostic ~~email. Cost-first default: Brevo (free 300/day, 100k contacts) or Mautic (open-source self-host, $0); MailerLite/Sender also free. SAFETY: the engine DRAFTS only - never sends, schedules a live send, or imports a list.",
+    "provider": "brevo",
+    "_provider_options": "brevo (free) | mautic (open-source self-host) | mailerlite | sender | make (Make.com) | export_only",
+    "from_name": "",
+    "from_address": "",
+    "compliance_footer": "",
+    "_compliance_footer_hint": "Physical address + unsubscribe - legally required on marketing email.",
+    "sequence_defaults": {
+      "nurture_length": 4,
+      "spacing_days": [
+        0,
+        2,
+        4,
+        7
+      ],
+      "_comment": "Default drip: 4 emails on days 0,2,4,7. Override per sequence."
+    },
+    "safety": {
+      "draft_only": true,
+      "never_send_or_import_list": true,
+      "_comment": "Engine stages drafts/paused sequences only. Sending + list import are the user's manual action."
+    }
   }
 }

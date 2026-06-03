@@ -8,7 +8,7 @@ A brand-locked content automation plugin for Claude. Plan a 30-day calendar, dra
 
 ## What you get
 
-- **8 skills** covering a full marketing department (all brand-neutral, config-driven):
+- **10 skills** covering a full marketing department (all brand-neutral, config-driven):
   - `competitor-trend-research` - studies competitors + the live SERP + trends → a beat-the-SERP brief
   - `content-planning` - a 30-day calendar with slots across your pillars
   - `brand-locked-blog-writing` - a full HTML blog whose layout comes from a `format` preset (dark/editorial, magazine, minimal...)
@@ -17,8 +17,10 @@ A brand-locked content automation plugin for Claude. Plan a 30-day calendar, dra
   - `video-production` - on-demand short-form video (script + clip via the video MCP + caption)
   - `campaign-planning` - a full campaign brief + phased calendar handed to the content skills
   - `paid-ads` - plan + draft Meta/Google ads as PAUSED drafts (never launches or spends)
-- **10 slash commands**: `/setup-pipeline`, `/research`, `/plan-month`, `/write-blog`, `/seo-audit`, `/post-weekly`, `/make-video`, `/video-today`, `/campaign-plan`, `/ads-plan`
-- **A knowledge + templates layer**: `knowledge/playbook.md` (engine-wide red-lines + routing) and `templates/` (output forms the skills fill)
+  - `analytics-reporting` - measure performance (logs + GA/GSC + ads) → report + optimizations (observability)
+  - `email-marketing` - draft newsletters / nurture sequences in brand voice (drafts only, never sends)
+- **12 slash commands**: `/setup-pipeline`, `/research`, `/plan-month`, `/write-blog`, `/seo-audit`, `/post-weekly`, `/make-video`, `/video-today`, `/campaign-plan`, `/ads-plan`, `/report`, `/email`
+- **A knowledge + harness layer**: `knowledge/playbook.md` (red-lines + routing), `knowledge/EVAL-SUITE.md` (golden tests, run before every version bump), `knowledge/FAILURE-MODES.md` (degrade-safely map), and `templates/` (output forms)
 - **Generic publish scripts**: `scripts/publish-blog.py`, `scripts/post-weekly-social.py`
 - **Working examples**: `examples/luna-base/` (editorial-dark B2B) and `examples/restaurant/` (magazine-light) - same engine, different brand
 

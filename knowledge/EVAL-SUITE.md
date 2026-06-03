@@ -45,6 +45,15 @@ Input: (a) a finished on-topic blog; (b) a deliberately thin / AI-boilerplate dr
 Assert: (a) → **PASS**; (b) → **FIX** with concrete reasons (indexability / E-E-A-T /
 human voice). *Catches: the SEO quality gate not silently passing everything.*
 
+
+**A6 — Email drafts only.**
+Input: `/email` any type.
+Assert: output is a DRAFT / paused sequence; no live send, no list import; every email has an unsubscribe + compliance footer; zero forbidden phrases (A3 holds). *Catches: email send-safety.*
+
+**A7 — Report never fabricates a metric.**
+Input: `/report` with an analytics source NOT connected.
+Assert: the unconnected rows read **"no data"**; no estimated/invented numbers; recommendations only cite sourced figures. *Catches: observability honesty.*
+
 ## Group B — Brand compliance
 
 **B1 — Layout from config, not hardcoded.**

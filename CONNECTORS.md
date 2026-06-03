@@ -38,18 +38,22 @@ The `paid-ads` skill creates PAUSED ad drafts via a connected ads MCP. It never 
 | **Google Ads** (Search/Display/YouTube/Shopping/Maps-Local) | official Google Ads MCP with `ADS_MCP_ENABLE_MUTATIONS=true` (self-host, free), or a hosted MCP (MCPBundles / Synter) | Full PAUSED campaign creation incl. geo + audience + device targeting. The official MCP is read-only UNTIL you enable mutations. If only read-only is connected, the skill exports a paste-ready plan. |
 | Others (TikTok/LinkedIn/Amazon/...) | per-platform or a unified MCP (Markifact/Synter) | Tool-agnostic - any connected ads MCP works. |
 
-## Analytics (~~analytics)
-Cost-first - the engine measures with $0 sources before any paid tool:
+## Analytics (~~analytics) — HYBRID architecture (chosen)
+The report pulls each channel from the cheapest solid source. Free MCPs per channel;
+one paid one-stop (Windsor.ai) is OPTIONAL and mainly justified for social organic.
 
-| Source | Cost | Gives |
-|---|---|---|
-| **Engine publish logs** | $0 (always) | what was published/drafted, when, where |
-| **Google Analytics 4** | **free** | site traffic, conversions |
-| **Google Search Console** | **free** | impressions, clicks, position, indexing |
-| **Platform-native insights** | free | reach/engagement per social platform |
-| **Meta + Google Ads MCPs** | free (already connected) | paid spend, CPC/CPA, conversions |
+| Channel | Data | Source (hybrid) | Cost | Setup |
+|---|---|---|---|---|
+| Web/traffic | GA4 sessions, conversions | **Official Google GA4 MCP** (github.com/googleanalytics/google-analytics-mcp) | $0 | self-host + Google Cloud creds |
+| SEO | Search Console impressions/clicks/position | **mcp-gsc** (github.com/AminForou/mcp-gsc) | $0 | uvx install + GSC creds |
+| Paid ads | spend, CPC/CPA, ROAS | **Meta Ads MCP + Google Ads MCP** | $0 | already connected |
+| Funnel/CRM | leads, MQL/SQL, pipeline, CAC | **HubSpot MCP** (registry) | $0 (free CRM tier) | one-click connect + HubSpot account |
+| Email | open/CTOR/revenue | **Brevo** (API/export) | $0 (existing account) | API key |
+| Social organic | reach, engagement, followers | open-source social MCP (bring API keys) **or Windsor.ai** | $0 (effort) / $19-99/mo | the one place paid is worth considering |
+| Everything (alt) | all of the above | **Windsor.ai** one-stop (official Claude connector) | $19 (3 src) / $99 (7 src) | one connect |
 
-Recommended: start with publish logs + GA4 + Search Console (all free) + the ads MCPs you already have. No paid analytics tool needed. The skill marks anything unconnected as "no data" - it never fabricates a metric.
+Engine rule: whatever is connected gets used; anything missing = "no data" in the report —
+never fabricated. Publish logs (outputs/) are always available at $0.
 
 ## Email (~~email)
 Cost-first - default to a free/open-source ESP:

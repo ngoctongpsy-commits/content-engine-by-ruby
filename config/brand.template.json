@@ -383,25 +383,80 @@
     }
   },
   "analytics": {
-    "_comment": "Measure -> optimize loop (analytics-reporting skill). Tool-agnostic ~~analytics. Cost-first: the engine's own publish logs ($0) + free tools (Google Analytics 4, Search Console) + platform-native insights + the connected Meta/Google Ads MCPs. NEVER fabricates a metric; missing sources are marked 'no data'.",
-    "providers": [
-      "publish_logs",
-      "google_analytics",
-      "search_console",
-      "platform_insights",
-      "meta_ads",
-      "google_ads"
-    ],
-    "_provider_options": "publish_logs (always, $0) | google_analytics | search_console | platform_insights | meta_ads | google_ads | other connected ~~analytics MCP",
+    "_comment": "Measure -> optimize loop (analytics-reporting skill). Completeness is enforced by knowledge/MARKETING-KPIS.md (8-section report + AARRR x channel matrix). Tool-agnostic ~~analytics; cost-first: engine publish logs ($0) + free GA4/Search Console + platform insights + connected Meta/Google Ads MCPs. NEVER fabricates a metric; missing sources = 'no data'.",
+    "business_type": "b2b",
+    "_business_type_options": "b2b (include funnel/pipeline + CAC payback) | ecommerce (AOV, cart abandonment) | local (foot traffic, calls)",
     "report_cadence": "weekly",
     "_cadence_options": "weekly | biweekly | monthly",
+    "report_sections": [
+      "executive_summary",
+      "goals_vs_kpis",
+      "channel_performance",
+      "funnel_conversion",
+      "attribution",
+      "budget_roi",
+      "insights",
+      "recommendations"
+    ],
+    "attribution_model": "data_driven",
+    "_attribution_options": "data_driven | last_click | first_click | linear | time_decay | position_based | mmm | umm",
+    "tracking_foundation": {
+      "_comment": "Checked FIRST in every report. If false/unknown, the report flags that numbers may be unreliable.",
+      "utm_tagging": false,
+      "ga4_events_as_conversions": false,
+      "server_side_or_capi": false,
+      "bot_internal_ip_filtering": false
+    },
     "kpi": {
-      "_comment": "Targets the report scores against (GREEN/YELLOW/RED). Fill per brand; leave 0 to skip.",
-      "leads_target": 0,
-      "blog_clicks_target": 0,
-      "social_engagement_rate_target": 0,
-      "email_open_rate_target": 0,
-      "ads_cpa_target": 0
+      "_comment": "Targets the report scores GREEN/YELLOW/RED against. Fill what matters per brand; leave 0/blank to skip. Grouped by the AARRR + business layers in MARKETING-KPIS.md.",
+      "acquisition": {
+        "organic_clicks_target": 0,
+        "social_reach_target": 0,
+        "paid_impressions_target": 0
+      },
+      "activation": {
+        "engagement_rate_target": 0,
+        "email_open_rate_target": 0,
+        "video_completion_rate_target": 0
+      },
+      "retention": {
+        "returning_user_rate_target": 0,
+        "churn_rate_max": 0
+      },
+      "referral": {
+        "shares_target": 0,
+        "share_of_voice_target": 0
+      },
+      "revenue": {
+        "conversion_rate_target": 0,
+        "roas_target": 0,
+        "revenue_target": 0
+      },
+      "funnel": {
+        "visitor_to_lead_target": 0,
+        "mql_to_sql_target": 0,
+        "sql_target": 0,
+        "pipeline_velocity_days_max": 0
+      },
+      "unit_economics": {
+        "cac_max": 0,
+        "cac_payback_months_max": 0,
+        "ltv_target": 0,
+        "ltv_cac_ratio_min": 0
+      }
+    },
+    "sources": {
+      "_comment": "HYBRID architecture. Free MCP per channel; Windsor.ai optional one-stop (mainly for social organic). The skill uses whatever is connected; missing = 'no data'.",
+      "web": "ga4_mcp (official Google GA4 MCP, $0 self-host)",
+      "seo": "gsc_mcp (mcp-gsc, $0)",
+      "paid": [
+        "meta_ads_mcp (connected)",
+        "google_ads_mcp (connected)"
+      ],
+      "funnel_crm": "hubspot_mcp (free CRM tier)",
+      "email": "brevo (existing account)",
+      "social_organic": "social_mcp ($0, bring API keys) | windsor_ai (paid, optional)",
+      "always_available": "publish_logs (outputs/, $0)"
     }
   },
   "email": {

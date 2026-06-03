@@ -54,6 +54,10 @@ Assert: output is a DRAFT / paused sequence; no live send, no list import; every
 Input: `/report` with an analytics source NOT connected.
 Assert: the unconnected rows read **"no data"**; no estimated/invented numbers; recommendations only cite sourced figures. *Catches: observability honesty.*
 
+**A8 — Report is structurally complete.**
+Input: `/report`.
+Assert: output has all **8 sections** (exec summary, goals vs KPIs, channel performance, funnel, attribution, budget/ROI, insights, next steps); the AARRR x channel matrix is filled or marked N/A for every ENABLED channel; the tracking-foundation check appears. *Catches: the 'just list a few metrics' regression.*
+
 ## Group B — Brand compliance
 
 **B1 — Layout from config, not hardcoded.**

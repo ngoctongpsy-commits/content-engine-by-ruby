@@ -38,7 +38,8 @@ The `paid-ads` skill creates PAUSED ad drafts via a connected ads MCP. It never 
 | **Google Ads** (Search/Display/YouTube/Shopping/Maps-Local) | official Google Ads MCP with `ADS_MCP_ENABLE_MUTATIONS=true` (self-host, free), or a hosted MCP (MCPBundles / Synter) | Full PAUSED campaign creation incl. geo + audience + device targeting. The official MCP is read-only UNTIL you enable mutations. If only read-only is connected, the skill exports a paste-ready plan. |
 | Others (TikTok/LinkedIn/Amazon/...) | per-platform or a unified MCP (Markifact/Synter) | Tool-agnostic - any connected ads MCP works. |
 
-## Analytics (~~analytics) — HYBRID architecture (chosen)
+## Analytics (~~analytics)
+> Full per-user setup guide: `docs/ANALYTICS-SETUP.md` (your own accounts; nothing ships with the plugin). — HYBRID architecture (chosen)
 The report pulls each channel from the cheapest solid source. Free MCPs per channel;
 one paid one-stop (Windsor.ai) is OPTIONAL and mainly justified for social organic.
 

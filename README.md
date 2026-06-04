@@ -37,6 +37,8 @@ Everything is **brand-neutral by construction**. The skills and scripts contain 
 /plugin install content-engine-by-ruby@ruby-content-tools
 ```
 
+Analytics (GA4 / Search Console / ads / CRM) connect with **your own accounts** - see `docs/ANALYTICS-SETUP.md`.
+
 Or install the packaged `.plugin` file (Customize → remove old → add new), or clone this repo into your workspace.
 
 ### 2. Run `/setup-pipeline`

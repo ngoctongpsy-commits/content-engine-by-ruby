@@ -107,6 +107,20 @@
         "publisher": "make",
         "fallback_publisher": "",
         "_comment": "Founder personal LinkedIn - often manual."
+      },
+      "facebook_reel": {
+        "enabled": true,
+        "channel_field_value": "facebook_reel",
+        "publisher": "make",
+        "fallback_publisher": "",
+        "_comment": "FB Reel (video). Host video on a crawler-friendly URL (see knowledge/DISTRIBUTION-GOTCHAS.md)."
+      },
+      "linkedin_video": {
+        "enabled": true,
+        "channel_field_value": "linkedin_video",
+        "publisher": "make",
+        "fallback_publisher": "",
+        "_comment": "LinkedIn video post."
       }
     }
   },
@@ -153,5 +167,41 @@
     "fallback_provider": "export_only",
     "list_or_segment": "",
     "_note": "Authenticate the provider with your own account; the engine never logs in or imports lists."
+  },
+  "distribution": {
+    "_comment": "Publish stage used by the social-distribution skill: video/Reel hosting, optional Telegram approval gate, and timezone-aware scheduling. Make routing + channel values still come from social.publishers / social.channels.",
+    "video_host": "catbox",
+    "_video_host_comment": "Crawler-friendly host the platform can fetch (a CMS with Disallow:/ in robots.txt makes Reels fail 422). 'catbox' = files.catbox.moe (free, no account). Or fix the CMS robots.txt to allow facebookexternalhit and set this to 'cms'.",
+    "ensure_fps": 30,
+    "_ensure_fps_comment": "Re-encode any video below 24fps to this before publishing (Reels reject <24fps).",
+    "approval": {
+      "enabled": true,
+      "_comment": "Two-way Telegram approval BEFORE publishing. enabled=false -> publish at the slot with no human gate.",
+      "telegram_token_file": ".telegram-token",
+      "telegram_chat_file": ".telegram-chat"
+    },
+    "schedule": {
+      "_comment": "Anchor publish times to the AUDIENCE timezone. days: 'daily' or a list of weekday abbrevs (Mon..Sun). time: 'HH:MM' local to timezone. Each key is a Make channel value (social.channels[*].channel_field_value).",
+      "timezone": "America/New_York",
+      "slots": {
+        "facebook_reel": {
+          "days": "daily",
+          "time": "12:30"
+        },
+        "linkedin": {
+          "days": [
+            "Tue"
+          ],
+          "time": "10:30"
+        },
+        "linkedin_video": {
+          "days": [
+            "Thu"
+          ],
+          "time": "10:30"
+        }
+      }
+    },
+    "queue_dir": "outputs/distribution/queue"
   }
 }

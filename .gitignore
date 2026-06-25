@@ -43,3 +43,7 @@ Thumbs.db
 .idea/
 .synctest.txt
 *.plugin
+
+# Defense-in-depth: ignore ALL hidden/secret files in config dirs (templates are *.template.json, not hidden)
+config/.*
+examples/*/config/.*

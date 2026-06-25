@@ -1,0 +1,21 @@
+{
+  "_comment": "Carousel content spec for scripts/build_carousel.py. Renders 7 PNG slides (1080x1350) using template A/B/C. Brand colors optional (defaults = clay/cream); set them to match config/brand.json.",
+  "template": "A",
+  "slug": "topic-slug",
+  "date": "YYYY-MM-DD",
+  "caption": "The post caption (hook + value + 1 soft CTA + hashtags).",
+  "brand": {
+    "_comment": "optional - override to match your brand.json; omit to use defaults",
+    "bg": "#F6F4EF", "ink": "#14161C", "accent": "#D97757", "accent_dark": "#B75A3E", "deep": "#201E2E",
+    "logo": ""
+  },
+  "slides": [
+    {"role":"hook","kicker":"the mix-up","title":"Big clickbait hook","sub":"one supporting line"},
+    {"role":"problem","kicker":"why it matters","title":"The problem","lines":["point one","point two"]},
+    {"role":"inside","kicker":"the idea","title":"The key idea","sub":"one line","term":"$ optional terminal line (template C)"},
+    {"role":"main","kicker":"step 1","title":"Main point A","lines":["detail","detail"],"nodes":["A","B","C"]},
+    {"role":"main","kicker":"step 2","title":"Main point B","lines":["detail","detail"]},
+    {"role":"conclusion","kicker":"takeaway","title":"The recap line","lines":["a","b","c"]},
+    {"role":"cta","title":"Want this for your team?","sub":"yourbrand.com"}
+  ]
+}

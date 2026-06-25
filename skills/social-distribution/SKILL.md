@@ -1,6 +1,6 @@
 ---
 name: social-distribution
-description: Publish finished content to social channels via the Make webhook, with an optional Telegram approval step and timezone-aware scheduling. Handles video and Reels (auto 30fps plus crawler-friendly hosting) which the image-only weekly social packet does not. Use when content is ready and the user wants it posted, scheduled, or sent for approval. Brand-neutral and config-driven. Not for generating content and not for Facebook Groups.
+description: Publish finished content to social channels via the Make webhook, with an optional Telegram approval step and timezone-aware scheduling. Handles video and Reels (auto 30fps plus crawler-friendly hosting) which the image-only weekly social packet does not. Use when content is ready and the user wants it posted, scheduled, or sent for approval. Supports per-platform captions (one render, several voices) and channels facebook_reel, instagram_reel, linkedin_video (company), linkedin_personal (founder), youtube_short. Brand-neutral and config-driven. Not for generating content and not for Facebook Groups.
 ---
 
 # Social Distribution (publish + approve + schedule)
@@ -49,8 +49,24 @@ Secrets (Make webhook, Telegram token) live in gitignored `config/.*` files or e
    then confirms on Telegram. Idempotent (awaiting -> approved -> posted/skipped).
 5. If approval disabled: publish immediately at the slot (or now) via the same Make path.
 
+## Per-platform captions (one render, several voices)
+Cross-posting the same original video to multiple platforms does NOT cut reach; adapting the CAPTION per
+platform raises it. So render once, write several captions, and let each channel post its own.
+- Put the caption files in one bundle dir: `caption-fb.txt` (FB+IG), `caption-li.txt` (LinkedIn company),
+  `caption-personal.txt` (LinkedIn personal/founder), `caption-yt.txt` (YouTube). See `knowledge/per-platform-captions.md`.
+- Map them in `config/channels.json` -> `distribution.caption_files` (channel value -> filename).
+- Run with `--caption-dir <bundle>`; the positional `caption` is the fallback when a file is missing.
+- `youtube_short` also needs a short title; the distributor derives it (first line of caption-yt, <=100 chars)
+  and sends it as the webhook `title` field for the Make YouTube module to map.
+
+## Channels (Make route per channel)
+facebook_reel, instagram_reel (video_url), linkedin_video (Company org), linkedin_personal (founder profile),
+youtube_short (HTTP Get-a-File(video_url) -> YouTube Upload, Public). Every Make route MUST be channel-filtered
+and carry a Skip/Ignore error handler (DISTRIBUTION-GOTCHAS.md) so one failed platform never deactivates the scenario.
+
 ## Scripts
 - `scripts/distribute.py` — prepare + host + enqueue + Telegram propose (config-driven).
+  Per-platform: `python scripts/distribute.py <video> "<fallback caption>" --caption-dir <bundle> --channel facebook_reel --channel instagram_reel --channel linkedin_video --channel linkedin_personal --channel youtube_short`.
 - `scripts/distribution-tick.py` — periodic: read approvals + publish due-approved items + confirm.
   Schedule it (e.g. every 15 min) so the user only taps approve in Telegram.
 

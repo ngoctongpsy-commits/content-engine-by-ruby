@@ -54,3 +54,9 @@ authenticate each with your own account; cost notes are in `CONNECTORS.md`.
 - No credentials/accounts are ever entered by the engine.
 
 Engine-wide rules: `knowledge/playbook.md`. Per-brand edge: `config/brand.json`.
+
+## Video + carousel (0.16.0)
+- `/carousel <topic>` — 7-slide carousel (3 templates). Renders PNGs via `scripts/build_carousel.py`.
+- `/reel <topic>` — compose a deep-teaching reel bundle (render with your own HTML->MP4 engine).
+- Distribution: fill `config/channels.json` (`distribution.caption_files` maps channel -> caption file).
+  `python scripts/distribute.py <video> "<caption>" --caption-dir <bundle> --channel facebook_reel --channel instagram_reel --channel linkedin_video --channel linkedin_personal --channel youtube_short`

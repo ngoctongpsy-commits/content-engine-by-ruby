@@ -207,3 +207,11 @@ MIT. Copyright (c) 2026 Ruby.
 ## Credits
 
 Built by Ruby. The Luna Base example is the live production tenant - thanks to Andy Pham (founder, Luna Base) for letting the real configuration ship as marketplace reference material.
+
+## Short-form video + carousel (added 0.16.0)
+- **`carousel-production`** — 7-slide image carousels in 3 rotating templates (A Spotlight / B Bold Magazine /
+  C Deep-tech Console). `python scripts/build_carousel.py spec.json out/`. Spec: `templates/carousel-spec.template.json`.
+- **`reel-production`** — compose a deep-teaching vertical reel bundle (HTML + script + 4 per-platform captions);
+  render with your own HTML->MP4 engine; then `social-distribution`.
+- **`social-distribution`** now does per-platform captions and channels facebook_reel, instagram_reel,
+  linkedin_video (company), linkedin_personal (founder), youtube_short. See `knowledge/per-platform-captions.md`.

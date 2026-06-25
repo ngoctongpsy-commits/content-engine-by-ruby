@@ -106,7 +106,7 @@
         "channel_field_value": "linkedin-personal",
         "publisher": "make",
         "fallback_publisher": "",
-        "_comment": "Founder personal LinkedIn - often manual."
+        "_comment": "LinkedIn PERSONAL video post (founder profile) - use a personal-voice caption"
       },
       "facebook_reel": {
         "enabled": true,
@@ -120,7 +120,21 @@
         "channel_field_value": "linkedin_video",
         "publisher": "make",
         "fallback_publisher": "",
-        "_comment": "LinkedIn video post."
+        "_comment": "LinkedIn COMPANY video post (organization page)"
+      },
+      "instagram_reel": {
+        "enabled": false,
+        "channel_field_value": "instagram_reel",
+        "publisher": "make",
+        "fallback_publisher": "",
+        "_comment": "IG Reel video; Make route filters channel=instagram_reel"
+      },
+      "youtube_short": {
+        "enabled": false,
+        "channel_field_value": "youtube_short",
+        "publisher": "make",
+        "fallback_publisher": "",
+        "_comment": "YouTube Shorts; Make route does HTTP Get-a-File(video_url) -> YouTube Upload (Public). Title comes from the webhook 'title' field (<=100 chars)."
       }
     }
   },
@@ -199,9 +213,32 @@
             "Thu"
           ],
           "time": "10:30"
+        },
+        "instagram_reel": {
+          "days": "daily",
+          "time": "12:30"
+        },
+        "youtube_short": {
+          "days": "daily",
+          "time": "12:30"
+        },
+        "linkedin_personal": {
+          "days": [
+            "Thu"
+          ],
+          "time": "10:30"
         }
-      }
+      },
+      "_two_reels_per_day_comment": "To post 2 reels/day, enqueue two separate items (e.g. a morning and an evening bundle); the slot times control WHEN each channel publishes."
     },
-    "queue_dir": "outputs/distribution/queue"
+    "queue_dir": "outputs/distribution/queue",
+    "_caption_files_comment": "Per-platform captions: maps the channel value sent to Make -> caption file inside the --caption-dir bundle. Lets one render carry several voices (see knowledge/per-platform-captions.md).",
+    "caption_files": {
+      "facebook_reel": "caption-fb.txt",
+      "instagram_reel": "caption-fb.txt",
+      "linkedin_video": "caption-li.txt",
+      "linkedin_personal": "caption-personal.txt",
+      "youtube_short": "caption-yt.txt"
+    }
   }
 }

@@ -23,7 +23,8 @@ except Exception:
     ZoneInfo = None
 
 VIDEO_EXT = {".mp4", ".mov", ".m4v", ".webm"}
-VIDEO_CHANNELS = {"facebook_reel", "linkedin_video"}
+VIDEO_CHANNELS = {"facebook_reel", "instagram_reel", "linkedin_video", "linkedin_personal", "youtube_short"}
+YT_CHANNELS = {"youtube_short", "youtube"}
 WD = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 
@@ -109,6 +110,7 @@ def next_slot_utc(slot, tz_name, now=None):
 def main(argv):
     ap = argparse.ArgumentParser()
     ap.add_argument("media"); ap.add_argument("caption")
+    ap.add_argument("--caption-dir", default="", help="dir with per-channel caption files (config distribution.caption_files maps channel->file)")
     ap.add_argument("--channel", action="append", required=True)
     ap.add_argument("--profile", default="")
     ap.add_argument("--now", action="store_true")
@@ -132,10 +134,19 @@ def main(argv):
             post_at = next_slot_utc(dist["schedule"]["slots"][chan], dist["schedule"]["timezone"])
         jid = str(int(_t.time() * 1000)) + "-" + chan
         approved = not dist["approval"]["enabled"]
-        job = {"id": jid, "media_url": url, "caption": a.caption, "channel": chan,
+        cap = a.caption
+        if a.caption_dir:
+            fn = (dist.get("caption_files") or {}).get(chan)
+            if fn:
+                cp = Path(a.caption_dir) / fn
+                if cp.exists():
+                    cap = cp.read_text(encoding="utf-8").strip()
+        job = {"id": jid, "media_url": url, "caption": cap, "channel": chan,
                "is_video": is_video, "post_at_utc": post_at,
                "status": "approved" if approved else "awaiting",
                "created": int(_t.time()), "profile": a.profile}
+        if chan in YT_CHANNELS:
+            job["title"] = (next((l.strip() for l in cap.splitlines() if l.strip()), "Video"))[:100]
         json.dump(job, open(qdir / (jid + ".json"), "w", encoding="utf-8"), ensure_ascii=False, indent=2)
         made.append((chan, post_at))
 

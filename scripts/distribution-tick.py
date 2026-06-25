@@ -113,6 +113,7 @@ def main(argv):
         if due <= now:
             body = {"channel": j["channel"], "post_text": j["caption"], "image_url": j["media_url"]}
             if j.get("is_video"): body["video_url"] = j["media_url"]
+            if j.get("title"): body["title"] = j["title"]  # YouTube needs a separate <=100-char title
             post_webhook(url, body)
             j["status"] = "posted"; save(p, j)
             if approval:

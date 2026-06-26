@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.16.0 (unreleased — pending version sign-off)
+## 0.16.0 — 2026-06-26
 Added the short-form VIDEO + CAROUSEL production layer and upgraded multi-platform distribution.
 - **NEW skill `carousel-production`** + `scripts/build_carousel.py` (3 rotating templates A/B/C, 7 slides,
   1080x1350, brand colors from spec/config) + `templates/carousel-spec.template.json` + fonts.

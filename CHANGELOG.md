@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.16.1 — 2026-07-03
+Reliability fix for video distribution (prevents a reel silently disappearing on a flaky upload host).
+- **social-distribution `scripts/distribute.py`:** `upload_host()` now **retries** the primary host
+  (catbox, 3x with backoff) and **always falls back** to a second host (0x0.st, 2x) so one free host being
+  down never loses a post. On total failure it returns cleanly and the caller **exits loudly** ("upload
+  failed on every host — re-run to retry") instead of dying with a cryptic error mid-pipeline. No config or
+  secrets added; `video_host` still selects the primary.
+
 ## 0.16.0 — 2026-06-26
 Added the short-form VIDEO + CAROUSEL production layer and upgraded multi-platform distribution.
 - **NEW skill `carousel-production`** + `scripts/build_carousel.py` (3 rotating templates A/B/C, 7 slides,

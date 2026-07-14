@@ -1,6 +1,6 @@
 {
   "name": "content-engine-by-ruby",
-  "version": "0.16.0",
+  "version": "0.16.1",
   "description": "Brand-neutral AI marketing department. Research competitors/trends, plan campaigns + a calendar, draft blogs (Google SEO gate), generate Canva images + Higgsfield videos, write per-platform social + email, draft paid ads (Meta/Google, paused), and report performance - all reading from config/brand.json. Harness: knowledge playbook + golden eval suite + failure-modes.",
   "author": {
     "name": "Ruby"

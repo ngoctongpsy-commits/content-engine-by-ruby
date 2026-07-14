@@ -83,14 +83,36 @@ def ensure_fps(path, target):
     return out
 
 
+def _try_curl(cmd):
+    """Run one curl upload; return the URL on success, else None (never raises)."""
+    try:
+        o = subprocess.check_output(cmd, text=True, timeout=210,
+                                    stderr=subprocess.DEVNULL).strip()
+        return o if o.startswith("http") else None
+    except Exception:
+        return None
+
+
 def upload_host(path, host):
-    if host == "catbox":
-        o = subprocess.check_output(["curl", "-s", "--max-time", "180", "-F", "reqtype=fileupload",
-            "-F", "fileToUpload=@" + path, "https://catbox.moe/user/api.php"], text=True).strip()
-        if not o.startswith("http"):
-            sys.exit("catbox upload failed: " + o[:200])
-        return o
-    sys.exit("Unsupported video_host '%s' (add it to upload_host)." % host)
+    """Resilient upload so one flaky free host never silently loses a post.
+    Primary host is retried, then a fallback host is always tried.
+    Returns the URL, or None if every attempt failed (caller decides)."""
+    import time
+    if host not in ("catbox", "", "0x0"):
+        sys.exit("Unsupported video_host '%s' (add it to upload_host)." % host)
+    catbox = ["curl", "-s", "--max-time", "180", "-F", "reqtype=fileupload",
+              "-F", "fileToUpload=@" + path, "https://catbox.moe/user/api.php"]
+    zero = ["curl", "-s", "--max-time", "180", "-F", "file=@" + path, "https://0x0.st"]
+    plan = ([(catbox, 3)] if host in ("catbox", "") else [(zero, 3)])
+    if host != "0x0":
+        plan.append((zero, 2))
+    for cmd, tries in plan:
+        for i in range(tries):
+            u = _try_curl(cmd)
+            if u:
+                return u
+            time.sleep(3 * (i + 1))
+    return None
 
 
 def next_slot_utc(slot, tz_name, now=None):
@@ -123,6 +145,9 @@ def main(argv):
     is_video_file = Path(a.media).suffix.lower() in VIDEO_EXT
     prepared = ensure_fps(a.media, int(dist.get("ensure_fps", 30))) if is_video_file else a.media
     url = upload_host(prepared, dist.get("video_host", "catbox"))
+    if not url:
+        sys.exit("ERROR: video upload failed on every host (catbox + fallback). "
+                 "Nothing was queued and the reel is NOT lost - re-run distribution to retry.")
 
     import time as _t
     made = []
